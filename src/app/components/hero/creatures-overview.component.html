@@ -1,0 +1,19 @@
+<h3>Creatures</h3>
+
+<div class="btn-toolbar mb-3" role="toolbar">
+    <button type="button" class="btn btn-primary">Toevoegen</button>
+    <button type="button" class="btn btn-primary">Verwijderen</button>
+    <button type="button" class="btn btn-primary">Wijzigen</button>
+</div>
+
+<ul class="list-group">
+    <li class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let creature of creatures; index as i"
+        [attr.data-index]="i" (click)="toggleCreatureField(creature); highlightCreatures[i]=!highlightCreatures[i]" [class.active]="highlightCreatures[i]">
+
+        <div class="custom-control d-flex justify-content-between">
+            <input type="button" class="custom-control-input" id="clickedCreature{{i}}" name="creatureId" [(ngModel)]="creature.id">
+            <label class="custom-control-label" for="clickedAbsence{{i}}">{{creature.naam}}</label>
+        </div>
+        <small class="text-muted align-self-start">{{creature.HP}}</small>
+    </li>
+</ul>
