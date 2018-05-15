@@ -1,0 +1,17 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item"  >
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href='#heroes' role="tab" routerLink="/creatures">Heroes</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href='#villains' role="tab" >Villains</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href='#encounters' role="tab" >Encounters</a>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="heroes" role="tabpanel"><creatures-overview></creatures-overview></div>
+  <div class="tab-pane fade" id="villains" role="tabpanel"><p>Test</p></div>
+  <div class="tab-pane fade" id="encounters" role="tabpanel"> <encounteroverview></encounteroverview></div>
+</div>

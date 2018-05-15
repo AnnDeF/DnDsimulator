@@ -1,20 +1,21 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { creature } from "../models/creature";
+import { Creature } from "../models/creature";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class CreatureService {
+private creaturesUrl = 'api/creatures';
 
     constructor(private http: HttpClient){}
 
-    public getCreatures(){
+    public getCreatures(): Observable<Creature[]>{
+        return this.http.get<Creature[]>(this.creaturesUrl);
     }
 
-    public getHeroes(){}
-
-    public getHero(id: number){}
-
-    public getMonsters(){}
-
-    public getMonster(id: number){}
+    public getCreature(id: number): Observable<Creature>{
+        const url = `${this.creaturesUrl}/${id}`;
+        return this.http.get<Creature>(url);
+    }
+    
 }

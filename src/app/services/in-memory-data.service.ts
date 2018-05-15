@@ -1,12 +1,13 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-export class InMemoryDataService implements InMemoryDbService {
+export class CreaturesData implements InMemoryDbService {
   createDb() {
     const creatures = [
       {
         'id': 1,
         'naam': 'Mike',
         'isHero': true,
-        'HP': 15, 
+        'maxHP': 15,
+        'battleHP':15, 
         'AC': 15,
         'Init': 15
       },
@@ -14,7 +15,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 2,
         'naam': 'Will',
         'isHero': true,
-        'HP': 15, 
+        'maxHP': 15, 
+        'battleHP':15, 
         'AC': 15,
         'Init': 15
       },
@@ -22,7 +24,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 3,
         'naam': 'Lucas',
         'isHero': true,
-        'HP': 15, 
+        'maxHP': 15, 
+        'battleHP':15, 
         'AC': 15,
         'Init': 15
       },
@@ -30,7 +33,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 4,
         'naam': 'Dustin',
         'isHero': true,
-        'HP': 15, 
+        'maxHP': 15, 
+        'battleHP':15, 
         'AC': 15,
         'Init': 15
         
@@ -39,7 +43,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 5,
         'naam': 'Jim',
         'isHero': true,
-        'HP': 30, 
+        'maxHP': 30, 
+        'battleHP':30, 
         'AC': 30,
         'Init': 30
         
@@ -48,7 +53,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 6,
         'naam': 'Nancy',
         'isHero': true,
-        'HP': 20, 
+        'maxHP': 20, 
+        'battleHP':20, 
         'AC': 20,
         'Init': 20
       },
@@ -56,7 +62,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 7,
         'naam': 'Steve',
         'isHero': true,
-        'HP': 20, 
+        'maxHP': 20, 
+        'battleHP':20, 
         'AC': 20,
         'Init': 20
       },
@@ -64,7 +71,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 8,
         'naam': 'Jonathan',
         'isHero': true,
-        'HP': 20, 
+        'maxHP': 20, 
+        'battleHP':20, 
         'AC': 20,
         'Init': 20
       },
@@ -72,7 +80,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 9,
         'naam': 'Joyce',
         'isHero': true,
-        'HP': 25, 
+        'maxHP': 25, 
+        'battleHP':25, 
         'AC': 25,
         'Init': 25
       },
@@ -80,7 +89,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 10,
         'naam': 'Max',
         'isHero': true,
-        'HP': 15, 
+        'maxHP': 15,
+        'battleHP':15,  
         'AC': 15,
         'Init': 15
       },
@@ -88,7 +98,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 11,
         'naam': 'Eleven',
         'isHero': true,
-        'HP': 25, 
+        'maxHP': 25,
+        'battleHP':25,  
         'AC': 25,
         'Init': 25
       },
@@ -96,7 +107,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 12,
         'naam': 'Dart',
         'isHero': false,
-        'HP': 75, 
+        'maxHP': 75,
+        'battleHP':75,  
         'AC': 50,
         'Init': 60
       },
@@ -104,7 +116,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 13,
         'naam': 'Demo-dog',
         'isHero': false,
-        'HP': 50, 
+        'maxHP': 50,
+        'battleHP':50,  
         'AC': 50,
         'Init': 50
       },
@@ -112,7 +125,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 14,
         'naam': 'Demogorgon',
         'isHero': false,
-        'HP': 150, 
+        'maxHP': 150,
+        'battleHP':150,  
         'AC': 150,
         'Init': 150
       },
@@ -120,7 +134,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 15,
         'naam': 'Mind Flayer',
         'isHero': false,
-        'HP': 250, 
+        'maxHP': 250, 
+        'battleHP':250, 
         'AC': 150,
         'Init': 150
       },
@@ -128,7 +143,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 16,
         'naam': 'Orcus',
         'isHero': false,
-        'HP': 80, 
+        'maxHP': 80, 
+        'battleHP':80, 
         'AC': 75,
         'Init': 50
       },
@@ -136,7 +152,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 17,
         'naam': 'Lolth',
         'isHero': true,
-        'HP': 120, 
+        'maxHP': 120,
+        'battleHP':120,  
         'AC': 80,
         'Init': 75
       },
@@ -144,7 +161,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 18,
         'naam': 'Tiamat',
         'isHero': false,
-        'HP': 150, 
+        'maxHP': 150, 
+        'battleHP':150, 
         'AC': 180,
         'Init': 100
       },
@@ -152,7 +170,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 19,
         'naam': 'Viserys',
         'isHero': false,
-        'HP': 220, 
+        'maxHP': 220, 
+        'battleHP':220, 
         'AC': 220,
         'Init': 220
       },
@@ -160,7 +179,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 20,
         'naam': 'Drogon',
         'isHero': false,
-        'HP': 250, 
+        'maxHP': 250, 
+        'battleHP':250, 
         'AC': 250,
         'Init': 250
       },
@@ -168,7 +188,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 21,
         'naam': 'Raeghal',
         'isHero': false,
-        'HP': 200, 
+        'maxHP': 200, 
+        'battleHP':200, 
         'AC': 200,
         'Init': 200
       },
@@ -176,7 +197,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 22,
         'naam': 'Beholder',
         'isHero': false,
-        'HP': 150, 
+        'maxHP': 150, 
+        'battleHP':150, 
         'AC': 150,
         'Init': 150
       },
@@ -184,7 +206,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 23,
         'naam': 'Owlbear',
         'isHero': false,
-        'HP': 65, 
+        'maxHP': 65, 
+        'battleHP':65, 
         'AC': 65,
         'Init': 65
       },
@@ -192,7 +215,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 24,
         'naam': 'Kobold',
         'isHero': false,
-        'HP': 150, 
+        'maxHP': 150,
+        'battleHP':150,  
         'AC': 150,
         'Init': 125
       },
@@ -200,7 +224,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 25,
         'naam': 'Orc',
         'isHero': false,
-        'HP': 105, 
+        'maxHP': 105, 
+        'battleHP':105, 
         'AC': 85,
         'Init': 95
       },
@@ -208,7 +233,8 @@ export class InMemoryDataService implements InMemoryDbService {
         'id': 26,
         'naam': 'Bulette',
         'isHero': false,
-        'HP': 100, 
+        'maxHP': 100,
+        'battleHP':100,  
         'AC': 125,
         'Init': 100
       }
