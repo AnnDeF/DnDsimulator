@@ -1,7 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 export class CreaturesData implements InMemoryDbService {
   createDb() {
-    const creatures = [
+    const heroes = [
       {
         'id': 1,
         'naam': 'Mike',
@@ -102,7 +102,10 @@ export class CreaturesData implements InMemoryDbService {
         'battleHP':25,  
         'AC': 25,
         'Init': 25
-      },
+      }
+    ];
+
+    const villains=[
       {
         'id': 12,
         'naam': 'Dart',
@@ -238,8 +241,11 @@ export class CreaturesData implements InMemoryDbService {
         'AC': 125,
         'Init': 100
       }
-    ];
-    return {creatures};
+    ]
+
+    const encounters = [];
+
+    return {heroes, villains, encounters};
   }
 }
 

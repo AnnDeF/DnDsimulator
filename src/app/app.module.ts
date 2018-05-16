@@ -12,18 +12,19 @@ import { CreatureService } from './services/creature.service';
 import { CreaturesOverviewComponent } from './components/creature/creatures-overview.component';
 import { EncounterDetailComponent } from './components/encounter/encounterdetail.component';
 import { EncounteroverviewComponent } from './components/encounter/encounteroverview.component';
-import { HomeComponent } from './components/home/home.component';
+
 
 const appRoutes: Routes = [
-  { path: 'home/creature/:id', component: CreatureDetailComponent },
-  { path: 'home/encounter/:id', component: EncounterDetailComponent },
-  { path: 'home/creatures', component: CreaturesOverviewComponent },
-  { path: 'home/encounters', component: EncounteroverviewComponent },
+  { path: 'creature/:id', component: CreatureDetailComponent },
+  { path: 'encounter/:id', component: EncounterDetailComponent },
+  { path: 'creatures', component: CreaturesOverviewComponent },
+  { path: 'heroes', component: CreaturesOverviewComponent },
+  { path: 'villains', component: CreaturesOverviewComponent },
+  { path: 'encounters', component: EncounteroverviewComponent },
   // { path: 'about',            component: AboutChildRouteComponent,
   //   children: [
   //     { path: 'figure/:id',   component: FigureDetailContainerComponent }
   //   ]},
-  { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({
@@ -32,8 +33,7 @@ const appRoutes: Routes = [
     CreatureDetailComponent,
     CreaturesOverviewComponent,
     EncounterDetailComponent,
-    EncounteroverviewComponent,
-    HomeComponent
+    EncounteroverviewComponent
   ],
   imports: [
     RouterModule.forRoot(

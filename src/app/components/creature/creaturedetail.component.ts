@@ -28,7 +28,7 @@ export class CreatureDetailComponent implements OnInit {
     Heal(heal: number) {
         var newHP = this.creature.battleHP + heal;
 
-        if (this.creature.battleHP > this.creature.maxHP) {
+        if (newHP > this.creature.maxHP) {
             return this.creature.maxHP;
         }
         else return newHP;

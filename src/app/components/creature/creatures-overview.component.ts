@@ -12,7 +12,18 @@ private creatures: Creature[];
   constructor(private creatureService:CreatureService) { }
 
   ngOnInit() {
+    this.refresh();
+  }
+
+  refresh(){
     this.creatureService.getCreatures().subscribe(creatures => this.creatures = creatures);
   }
 
+  summonHeroes(){
+    this.creatures.filter(creature => creature.isHero === true);
+  }
+
+  summonVillains(){
+    this.creatures.filter(creature => creature.isHero === false);
+  }
 }
