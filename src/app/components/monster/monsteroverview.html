@@ -9,19 +9,19 @@
     <tbody>
         <tr *ngFor="let monster of monsters">
             <td>
-                <a [routerLink]="['/monsters/detail', monster.id]">{{monster.naam}}</a>
+                <a [routerLink]="['/monsters', monster.id]">{{monster.naam}}</a>
             </td>
             <td>{{monster.maxHP}}</td>
             <td>{{monster.AC}}</td>
-            <button type="button" class="btn btn-default btn-sm" [routerLink]="['/monsters/detail', monster.id, 'edit']">
-                <span class="glyphicons glyphicons-pencil"></span>
+            <button class="btn btn-secondary btn-sm" [routerLink]="['/monsters', monster.id, 'edit']">
+                Wijzig
             </button>
-            <button type="button" class="btn btn-default btn-sm" (click)="addMonster(monster.id)">
-                <span class="glyphicons glyphicons-plus"></span>
+            <button class="btn btn-secondary btn-sm" (click)="addToEncounter(monster.id)">
+                Toevoegen encounter
             </button>
         </tr>
     </tbody>
 </table>
-<button type="button" class="btn btn-default" [routerLink]="['/monster/', 'create']">
+<button type="button" class="btn btn-default" [routerLink]="['/monster', 'create']">
     <span class="glyphicon glyphicon-plus"> New monster </span>
 </button>

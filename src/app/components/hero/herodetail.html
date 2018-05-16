@@ -1,20 +1,33 @@
-<h3>{{creature.naam}}</h3>
+<div *ngIf="hero" class="container">
+    <h3>{{hero.naam}}</h3>
+    <form #form="ngForm" class="d-flex flex-column" novalidate>
 
-<div class="btn-toolbar mb-3" role="toolbar">
-    <button type="button" class="btn btn-primary">Toevoegen</button>
-    <button type="button" class="btn btn-primary">Verwijderen</button>
-    <button type="button" class="btn btn-primary">Wijzigen</button>
-</div>
-
-<ul class="list-group">
-    <li class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let creature of creatures; index as i"
-        [attr.data-index]="i" (click)="toggleCreatureField(creature); highlightCreatures[i]=!highlightCreatures[i]" [class.active]="highlightCreatures[i]">
-
-        <div class="custom-control d-flex justify-content-between">
-            <input type="button" class="custom-control-input" id="clickedCreature{{i}}" name="creatureId" [(ngModel)]="creature.id">
-            <label class="custom-control-label" for="clickedAbsence{{i}}">{{creature.naam}}</label>
+        <div class="form-group d-flex justify-content-start">
+            <label for="Naam" class="col-form-label w-25"> Naam: </label>
+            <input id="Naam" type="text" class="form-control w-25" placeholder="Naam" [(ngModel)]="hero.naam" />
         </div>
-        <small class="text-muted align-self-start">{{creature.HP}}</small>
-    </li>
-</ul>
 
+        <div class="form-group d-flex justify-content-start">
+            <label for="HP" class="col-form-label w-25"> Hit Points: </label>
+            <input id="HP" type="number" class="form-control w-25" [(ngModel)]="hero.maxHP">
+        </div>
+
+        <div class="form-group d-flex justify-content-start">
+            <label for="AC" class="col-form-label w-25"> Armor Class: </label>
+            <input id="AC" type="number" class="form-control w-25" [(ngModel)]="hero.AC">
+        </div>
+
+        <div class="form-group d-flex justify-content-start">
+            <label for="Init" class="col-form-label w-25"> Initiatief modifier: </label>
+            <input id="Init" type="number" class="form-control w-25" [(ngModel)]="hero.Init">
+        </div>
+    </form>
+
+    <button *ngIf="isNew" type="button" class="btn btn-primary" (click)="addHero()">
+        <span class="glyphicon glyphicon-ok"> Hero opslaan</span>
+    </button>
+
+    <button *ngIf="!isNew" type="button" class="btn btn-primary" (click)="saveHero()">
+        <span class="glyphicon glyphicon-ok"> Wijzigingen opslaan</span>
+    </button>
+</div>

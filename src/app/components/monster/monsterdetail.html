@@ -1,3 +1,33 @@
-<p>
-  monster works!
-</p>
+<div *ngIf="monster" class="container">
+    <h3>{{monster.naam}}</h3>
+    <form #form="ngForm" class="d-flex flex-column" novalidate>
+
+        <div class="form-group d-flex justify-content-start">
+            <label for="Naam" class="col-form-label w-25"> Naam: </label>
+            <input id="Naam" type="text" class="form-control w-25" placeholder="Naam" [(ngModel)]="monster.naam" />
+        </div>
+
+        <div class="form-group d-flex justify-content-start">
+            <label for="HP" class="col-form-label w-25"> Hit Points: </label>
+            <input id="HP" type="number" class="form-control w-25" [(ngModel)]="monster.maxHP">
+        </div>
+
+        <div class="form-group d-flex justify-content-start">
+            <label for="AC" class="col-form-label w-25"> Armor Class: </label>
+            <input id="AC" type="number" class="form-control w-25" [(ngModel)]="monster.AC">
+        </div>
+
+        <div class="form-group d-flex justify-content-start">
+            <label for="Init" class="col-form-label w-25"> Initiatief modifier: </label>
+            <input id="Init" type="number" class="form-control w-25" [(ngModel)]="monster.init">
+        </div>
+    </form>
+
+    <button *ngIf="isNew" type="button" class="btn btn-primary" (click)="addmonster()">
+        <span class="glyphicon glyphicon-ok"> Monster opslaan</span>
+    </button>
+
+    <button *ngIf="!isNew" type="button" class="btn btn-primary" (click)="savemonster()">
+        <span class="glyphicon glyphicon-ok"> Wijzigingen opslaan</span>
+    </button>
+</div>

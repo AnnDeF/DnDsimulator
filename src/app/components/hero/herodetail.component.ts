@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params } from '@angular/router';
-import { Creature } from '../../models/creature';
 import { switchMap } from 'rxjs/operators'
 import { Hero } from '../../models/hero';
 import { HeroService } from '../../services/hero.service';
@@ -12,19 +11,37 @@ import { HeroService } from '../../services/hero.service';
 })
 export class HeroDetailComponent implements OnInit {
     private hero: Hero;
+    private isNew:boolean;
+    private sub:any;
 
     constructor(private heroService: HeroService, private route: ActivatedRoute) { }
 
     ngOnInit() {
-        this.route.params
-            .pipe(switchMap((params: ParamMap) => this.heroService.getHero(+params.get('id'))))
-            .subscribe(hero => this.hero = hero);
+        this.sub = this.route.params.subscribe(params => {
+            let Id = +params['id']; // (+) converts string 'id' to a number
+            this.isNew = isNaN(Id);
+
+            // if (!this.isNew) {
+                this.heroService.getHero(Id)
+                    .subscribe(hero => 
+                        this.hero = hero );
+            // }
+            // else {
+            //     this.hero = {
+            //         id:0,
+            //         naam: '',
+            //         maxHP:0,
+            //         battleHP:0,
+            //         AC:0,
+            //         Init:0
+            //     }
+            // }
+        });
     }
 
-   // switchMap is usually used when you have some async operation that is triggered by some prepended "event/stream". The difference to e.g. flatMap or concatMap is,
-   // that as soon as the next trigger emits, the current async operation is canceled and retriggered.   In your case this means, that as soon as the route-params
-   // change, your hero-service is automatically called again with the changed params and the previouse call is canceled so you won't receive outdated data.
+    addHero() { }
 
+    saveHero() { }
 
     Heal(heal: number) {
         var newHP = this.hero.battleHP + heal;

@@ -9,19 +9,19 @@
     <tbody>
         <tr *ngFor="let hero of heroes">
             <td>
-                <a [routerLink]="['/heroes/detail', hero.id]">{{hero.naam}}</a>
+                <a [routerLink]="['/heroes', hero.id]">{{hero.naam}}</a>
             </td>
             <td>{{hero.maxHP}}</td>
             <td>{{hero.AC}}</td>
-            <button type="button" class="btn btn-default btn-sm" [routerLink]="['/heroes/detail', hero.id, 'edit']">
+            <button type="button" class="btn btn-default btn-sm" [routerLink]="['/heroes', hero.id, 'edit']">
                 <span class="glyphicons glyphicons-pencil"></span>
             </button>
-            <button type="button" class="btn btn-default btn-sm" (click)="addHero(hero.id)">
+            <button type="button" class="btn btn-default btn-sm" (click)="addToEncounter(hero.id)">
                 <span class="glyphicons glyphicons-plus"></span>
             </button>
         </tr>
     </tbody>
 </table>
-<button type="button" class="btn btn-default" [routerLink]="['/hero/', 'create']">
+<button type="button" class="btn btn-default" [routerLink]="['/heroes', 'create']">
     <span class="glyphicon glyphicon-plus"> New hero </span>
 </button>
