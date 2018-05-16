@@ -7,19 +7,22 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { CreaturesData } from './services/in-memory-data.service';
 
 import { AppComponent } from './app.component';
-import { CreatureDetailComponent } from './components/creature/creaturedetail.component';
-import { CreatureService } from './services/creature.service';
-import { CreaturesOverviewComponent } from './components/creature/creatures-overview.component';
 import { EncounterDetailComponent } from './components/encounter/encounterdetail.component';
 import { EncounteroverviewComponent } from './components/encounter/encounteroverview.component';
+import { HeroDetailComponent } from './components/hero/herodetail.component';
+import { HeroesOverviewComponent } from './components/hero/heroes-overview.component';
+import { HeroService } from './services/hero.service';
+import { MonsteroverviewComponent } from './components/monster/monsteroverview.component';
+import { MonsterDetailComponent } from './components/monster/monsterdetail.component';
+import { MonsterService } from './services/monster.service';
+
 
 
 const appRoutes: Routes = [
-  { path: 'creature/:id', component: CreatureDetailComponent },
+  { path: 'hero/:id', component: HeroDetailComponent },
   { path: 'encounter/:id', component: EncounterDetailComponent },
-  { path: 'creatures', component: CreaturesOverviewComponent },
-  { path: 'heroes', component: CreaturesOverviewComponent },
-  { path: 'villains', component: CreaturesOverviewComponent },
+  { path: 'heroes', component: HeroesOverviewComponent },
+  { path: 'monsters', component: MonsteroverviewComponent },
   { path: 'encounters', component: EncounteroverviewComponent },
   // { path: 'about',            component: AboutChildRouteComponent,
   //   children: [
@@ -30,10 +33,12 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    CreatureDetailComponent,
-    CreaturesOverviewComponent,
+    HeroDetailComponent,
+    HeroesOverviewComponent,
     EncounterDetailComponent,
-    EncounteroverviewComponent
+    EncounteroverviewComponent,
+    MonsterDetailComponent,
+    MonsteroverviewComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -46,7 +51,7 @@ const appRoutes: Routes = [
     ),
     FormsModule
   ],
-  providers: [CreatureService],
+  providers: [HeroService, MonsterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

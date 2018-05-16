@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { Creature } from '../../models/creature';
-import { CreatureService } from '../../services/creature.service';
 import { switchMap } from 'rxjs/operators'
+import { Hero } from '../../models/hero';
+import { HeroService } from '../../services/hero.service';
 
 
 @Component({
-    selector: 'creature',
-    templateUrl: './creaturedetail.component.html'
+    selector: 'hero',
+    templateUrl: './herodetail.html'
 })
-export class CreatureDetailComponent implements OnInit {
-    private creature: Creature;
+export class HeroDetailComponent implements OnInit {
+    private hero: Hero;
 
-    constructor(private creatureService: CreatureService, private route: ActivatedRoute) { }
+    constructor(private heroService: HeroService, private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.route.params
-            .pipe(switchMap((params: ParamMap) => this.creatureService.getCreature(+params.get('id'))))
-            .subscribe(creature => this.creature = creature);
+            .pipe(switchMap((params: ParamMap) => this.heroService.getHero(+params.get('id'))))
+            .subscribe(hero => this.hero = hero);
     }
 
    // switchMap is usually used when you have some async operation that is triggered by some prepended "event/stream". The difference to e.g. flatMap or concatMap is,
@@ -26,16 +27,16 @@ export class CreatureDetailComponent implements OnInit {
 
 
     Heal(heal: number) {
-        var newHP = this.creature.battleHP + heal;
+        var newHP = this.hero.battleHP + heal;
 
-        if (newHP > this.creature.maxHP) {
-            return this.creature.maxHP;
+        if (newHP > this.hero.maxHP) {
+            return this.hero.maxHP;
         }
         else return newHP;
     };
 
     doDamage(damage: number) {
-        var newHP = this.creature.battleHP - damage;
+        var newHP = this.hero.battleHP - damage;
         if (newHP <= 0) {
             return 0;
         }

@@ -4,7 +4,7 @@ import { Creature } from '../../models/creature';
 
 @Component({
   selector: 'encounterdetail',
-  templateUrl: './encounterdetail.component.html'
+  templateUrl: './encounterdetail.html'
 })
 
 export class EncounterDetailComponent implements OnInit {

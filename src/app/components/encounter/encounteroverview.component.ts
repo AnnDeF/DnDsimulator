@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'encounteroverview',
-  templateUrl: './encounteroverview.component.html'
+  templateUrl: './encounteroverview.html'
 })
 export class EncounteroverviewComponent implements OnInit {
 

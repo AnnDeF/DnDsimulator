@@ -1,0 +1,27 @@
+<table class="table table-striped table-dark table-hover" *ngIf="heroes">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Naam</th>
+            <th scope="col">Hit Points</th>
+            <th scope="col">Armor Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let hero of heroes">
+            <td>
+                <a [routerLink]="['/heroes/detail', hero.id]">{{hero.naam}}</a>
+            </td>
+            <td>{{hero.maxHP}}</td>
+            <td>{{hero.AC}}</td>
+            <button type="button" class="btn btn-default btn-sm" [routerLink]="['/heroes/detail', hero.id, 'edit']">
+                <span class="glyphicons glyphicons-pencil"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-sm" (click)="addHero(hero.id)">
+                <span class="glyphicons glyphicons-plus"></span>
+            </button>
+        </tr>
+    </tbody>
+</table>
+<button type="button" class="btn btn-default" [routerLink]="['/hero/', 'create']">
+    <span class="glyphicon glyphicon-plus"> New hero </span>
+</button>
