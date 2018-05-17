@@ -4,22 +4,22 @@
 
         <div class="form-group d-flex justify-content-start">
             <label for="Naam" class="col-form-label w-25"> Naam: </label>
-            <input id="Naam" type="text" class="form-control w-25" placeholder="Naam" [(ngModel)]="hero.naam" />
+            <input id="Naam" type="text" class="form-control w-25" placeholder="Naam" name="Naam" [(ngModel)]="hero.naam" />
         </div>
 
         <div class="form-group d-flex justify-content-start">
             <label for="HP" class="col-form-label w-25"> Hit Points: </label>
-            <input id="HP" type="number" class="form-control w-25" [(ngModel)]="hero.maxHP">
+            <input id="HP" type="number" class="form-control w-25" name="maxHP" [(ngModel)]="hero.maxHP">
         </div>
 
         <div class="form-group d-flex justify-content-start">
             <label for="AC" class="col-form-label w-25"> Armor Class: </label>
-            <input id="AC" type="number" class="form-control w-25" [(ngModel)]="hero.AC">
+            <input id="AC" type="number" class="form-control w-25" name="AC" [(ngModel)]="hero.AC">
         </div>
 
         <div class="form-group d-flex justify-content-start">
             <label for="Init" class="col-form-label w-25"> Initiatief modifier: </label>
-            <input id="Init" type="number" class="form-control w-25" [(ngModel)]="hero.Init">
+            <input id="Init" type="number" class="form-control w-25" name="Init" [(ngModel)]="hero.Init">
         </div>
     </form>
 
@@ -27,7 +27,7 @@
         <span class="glyphicon glyphicon-ok"> Hero opslaan</span>
     </button>
 
-    <button *ngIf="!isNew" type="button" class="btn btn-primary" (click)="saveHero()">
+    <button *ngIf="!isNew" type="button" class="btn btn-primary" (click)="updateHero()">
         <span class="glyphicon glyphicon-ok"> Wijzigingen opslaan</span>
     </button>
 </div>

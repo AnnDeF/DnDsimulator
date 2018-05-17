@@ -4,9 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { CommonModule } from '@angular/common';
+import { AppComponent } from './app.component';
+
 import { CreaturesData } from './services/in-memory-data.service';
 
-import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
 
 import { EncounterDetailComponent } from './components/encounter/encounterdetail.component';
 import { EncounteroverviewComponent } from './components/encounter/encounteroverview.component';
@@ -19,9 +22,7 @@ import { MonsterDetailComponent } from './components/monster/monsterdetail.compo
 
 import { HeroService } from './services/hero.service';
 import { MonsterService } from './services/monster.service';
-
-
-
+import { EncounterService } from './services/encounter.service';
 
 const appRoutes: Routes = [
   { path: 'heroes/:id', component: HeroDetailComponent },
@@ -46,20 +47,22 @@ const appRoutes: Routes = [
     EncounterDetailComponent,
     EncounteroverviewComponent,
     MonsterDetailComponent,
-    MonsteroverviewComponent
+    MonsteroverviewComponent,
+    HomeComponent
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes
-    ),
+    CommonModule,
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       CreaturesData, { dataEncapsulation: false }
     ),
-    FormsModule
+    RouterModule.forRoot(
+      appRoutes
+    )
   ],
-  providers: [HeroService, MonsterService],
+  providers: [HeroService, MonsterService, EncounterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

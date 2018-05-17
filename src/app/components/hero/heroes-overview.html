@@ -14,10 +14,10 @@
             <td>{{hero.maxHP}}</td>
             <td>{{hero.AC}}</td>
             <button type="button" class="btn btn-default btn-sm" [routerLink]="['/heroes', hero.id, 'edit']">
-                <span class="glyphicons glyphicons-pencil"></span>
+                Wijzig
             </button>
             <button type="button" class="btn btn-default btn-sm" (click)="addToEncounter(hero.id)">
-                <span class="glyphicons glyphicons-plus"></span>
+                toevoegen
             </button>
         </tr>
     </tbody>

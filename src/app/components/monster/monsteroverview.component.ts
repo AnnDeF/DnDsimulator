@@ -7,7 +7,8 @@ import { MonsterService } from '../../services/monster.service';
   templateUrl: './monsteroverview.html'
 })
 export class MonsteroverviewComponent implements OnInit {
-private monsters: Monster[];
+  private monsters: Monster[];
+  private sorted: boolean = false;
 
   constructor(private monsterService: MonsterService) { }
 
@@ -15,7 +16,59 @@ private monsters: Monster[];
     this.refresh();
   }
 
-  refresh(){
+  refresh() {
     this.monsterService.getMonsters().subscribe(monsters => this.monsters = monsters);
+  }
+
+  sortByHP() {
+    this.sorted = !this.sorted;
+    if (this.sorted) {
+      this.monsters.sort(function (a: Monster, b: Monster) {
+        if (a.maxHP < b.maxHP) {
+          return 1;
+        }
+        if (a.maxHP > b.maxHP) {
+          return -1;
+        }
+        return 0;
+      });
+    }
+    else {
+      this.monsters.sort(function (a: Monster, b: Monster) {
+        if (a.maxHP < b.maxHP) {
+          return -1;
+        }
+        if (a.maxHP > b.maxHP) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+  }
+
+  sortByAC() {
+    this.sorted = !this.sorted;
+    if (this.sorted) {
+      this.monsters.sort(function (a: Monster, b: Monster) {
+        if (a.AC < b.AC) {
+          return 1;
+        }
+        if (a.AC > b.AC) {
+          return -1;
+        }
+        return 0;
+      });
+    }
+    else {
+      this.monsters.sort(function (a: Monster, b: Monster) {
+        if (a.AC < b.AC) {
+          return -1;
+        }
+        if (a.AC > b.AC) {
+          return 1;
+        }
+        return 0;
+      });
+    }
   }
 }

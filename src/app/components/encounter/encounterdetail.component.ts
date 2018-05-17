@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Creature } from '../../models/creature';
+import { Encounter } from '../../models/encounter';
 
 
 @Component({
@@ -8,17 +8,22 @@ import { Creature } from '../../models/creature';
 })
 
 export class EncounterDetailComponent implements OnInit {
-  private creatures: Creature[];
-
+  private encounter:Encounter;
+  private isVisible:boolean = true;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  toggleVisibility(){
+    this.isVisible = !this.isVisible;
+  }
+
   removeFromEncounter(){}
 
+  clearEncounter(){}
  
-
+  
 
 }
