@@ -1,21 +1,8 @@
 <header style="text-align:center">
-  <img src="utils/images/stranger-games.png" alt="stranger-games">
+  <img src="utils/images/stranger-games.jpg" alt="stranger-games">
 </header>
 
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" role="tab" routerLink="/heroes" routerLinkActive="active">Heroes</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" role="tab" routerLink="/monsters" routerLinkActive="active">Monsters</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" role="tab" routerLink="/encounters" routerLinkActive="active">Encounters</a>
-  </li>
-</ul>
-
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane active">
-    <router-outlet></router-outlet>
-  </div>
+<div class="wrapper">
+<section class="library"><library></library></section>
+<section class="encounterDetail"><encounterdetail></encounterdetail></section>
 </div>

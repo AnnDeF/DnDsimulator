@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { catchError, map } from "rxjs/operators";
 import { Hero } from "../models/hero";
 
 const headerInfo = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

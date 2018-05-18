@@ -1,8 +1,13 @@
-<div class="input-group">
-    <div class="input-group-prepend">
-        <div class="btn btn-primary input-group-text" id="btnGroupAddon">Filter</div>
+<div class="btn-toolbar justify-content-start" role="toolbar">
+    <button type="button" class="btn btn-secondary" [routerLink]="['/heroes', 'create']">
+        Add hero
+    </button>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <div class="btn btn-secondary input-group-text" id="btnGroupAddon">Filter</div>
+        </div>
+        <input type="text" class="form-control" placeholder="Naam" [(ngModel)]="listFilter">
     </div>
-    <input type="text" class="form-control" placeholder="Naam" [(ngModel)]="listFilter">
 </div>
 <table class="table table-striped table-dark table-hover" *ngIf="filteredHeroes">
     <thead class="thead-dark">
@@ -27,11 +32,8 @@
                 Wijzig
             </button>
             <button type="button" class="btn btn-default btn-sm" (click)="addToEncounter(hero)">
-                Toevoegen
+                Voeg toe
             </button>
         </tr>
     </tbody>
 </table>
-<button type="button" class="btn btn-default" [routerLink]="['/heroes', 'create']">
-    <span class="glyphicon glyphicon-plus"> New hero </span>
-</button>

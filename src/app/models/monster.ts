@@ -1,4 +1,4 @@
-export class Monster {
+export class Monster  {
     id: number;
     naam: string;
     maxHP: number; //HitPoints

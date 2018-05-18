@@ -1,4 +1,6 @@
-export class Hero {
+
+
+export class Hero{
     id: number;
     naam: string;
     maxHP: number; //HitPoints

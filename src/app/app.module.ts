@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 
 import { CreaturesData } from './services/in-memory-data.service';
 
-import { HomeComponent } from './components/home/home.component';
+import { LibraryComponent } from './components/library/library.component';
 
 import { EncounterDetailComponent } from './components/encounter/encounterdetail.component';
 import { EncounteroverviewComponent } from './components/encounter/encounteroverview.component';
@@ -48,7 +48,7 @@ const appRoutes: Routes = [
     EncounteroverviewComponent,
     MonsterDetailComponent,
     MonsteroverviewComponent,
-    HomeComponent
+    LibraryComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,35 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Encounter } from '../models/encounter';
 
-@Injectable({
-  providedIn: 'root'
-})
+const headerInfo = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+
+@Injectable()
 export class EncounterService {
+  private encountersUrl = 'api/encounters';
 
-  constructor() { }
+    constructor(private http: HttpClient) { }
+
+    public getEncounters(): Observable<Encounter[]> {
+        return this.http.get<Encounter[]>(this.encountersUrl);
+    }
+
+    public getEncounter(id: number): Observable<Encounter> {
+        const url = `${this.encountersUrl}/${id}`;
+        return this.http.get<Encounter>(url);
+    }
+
+    public deleteEncounter(id: number): Observable<Encounter> {
+        const url = `${this.encountersUrl}/${id}`;
+        return this.http.post<Encounter>(url, headerInfo);
+    }
+
+    public updateEncounter(Encounter: Encounter): Observable<Encounter> {
+        return this.http.post<Encounter>(this.encountersUrl, Encounter, headerInfo);
+    }
+
+    public addEncounter(Encounter: Encounter): Observable<Encounter>{
+        return this.http.post<Encounter>(this.encountersUrl, Encounter, headerInfo);
+    }
 }

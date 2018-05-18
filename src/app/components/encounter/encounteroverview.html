@@ -1,3 +1,25 @@
-<p>
-  encounteroverview works!
-</p>
+<div class="btn-toolbar justify-content-start" role="toolbar">
+  <button type="button" class="btn btn-secondary" [routerLink]="['/encounters', 'create']">
+    New encounter
+  </button>
+  <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="btn btn-secondary input-group-text" id="btnGroupAddon">Filter</div>
+      </div>
+      <input type="text" class="form-control" placeholder="Naam" [(ngModel)]="listFilter">
+    </div>
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item flex-column" *ngFor="let encounter of encounters">
+    <div class="d-flex justify-content-between">
+      <label class="w-25">
+        <a [routerLink]="['/encounters/', encounter.id]">{{encounter.encounterNaam}}</a>
+      </label>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-secondary" (click)="deleteEncounter()">Verwijder</button>
+        <button type="button" class="btn btn-secondary" (click)="editEncounter()">Wijzig</button>
+      </div>
+    </div>
+  </li>
+</ul>
