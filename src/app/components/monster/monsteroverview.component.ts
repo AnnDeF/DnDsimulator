@@ -8,8 +8,13 @@ import { MonsterService } from '../../services/monster.service';
 })
 export class MonsteroverviewComponent implements OnInit {
   private monsters: Monster[];
-  private sorted: boolean = false;
+  private selectedMonsters:Monster[];
+  private filteredMonsters: Monster[];
+  private clickedMonsters:Monster[];
 
+  private sorted: boolean = false;
+  private _listFilter: string;
+  
   constructor(private monsterService: MonsterService) { }
 
   ngOnInit() {
@@ -17,7 +22,21 @@ export class MonsteroverviewComponent implements OnInit {
   }
 
   refresh() {
-    this.monsterService.getMonsters().subscribe(monsters => this.monsters = monsters);
+    this.monsterService.getMonsters().subscribe(monsters => {this.monsters = monsters; this.filteredMonsters = monsters});
+  }
+
+  get listFilter(): string {
+    return this._listFilter;
+  }
+
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredMonsters = this.listFilter ? this.performFilter(this.listFilter) : this.monsters;
+  }
+
+  performFilter(filterBy: string): Monster[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.monsters.filter((monster: Monster) => monster.naam.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
   sortByHP() {

@@ -1,13 +1,23 @@
-<table class="table table-striped table-dark table-hover" *ngIf="heroes">
+<div class="input-group">
+    <div class="input-group-prepend">
+        <div class="btn btn-primary input-group-text" id="btnGroupAddon">Filter</div>
+    </div>
+    <input type="text" class="form-control" placeholder="Naam" [(ngModel)]="listFilter">
+</div>
+<table class="table table-striped table-dark table-hover" *ngIf="filteredHeroes">
     <thead class="thead-dark">
         <tr>
             <th scope="col">Naam</th>
-            <th scope="col">Hit Points</th>
-            <th scope="col">Armor Class</th>
+            <th scope="col">
+                <a (click)="sortByHP()">Hit Points</a>
+            </th>
+            <th scope="col">
+                <a (click)="sortByAC()">Armor Class</a>
+            </th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let hero of heroes">
+        <tr *ngFor="let hero of filteredHeroes">
             <td>
                 <a [routerLink]="['/heroes', hero.id]">{{hero.naam}}</a>
             </td>
@@ -16,8 +26,8 @@
             <button type="button" class="btn btn-default btn-sm" [routerLink]="['/heroes', hero.id, 'edit']">
                 Wijzig
             </button>
-            <button type="button" class="btn btn-default btn-sm" (click)="addToEncounter(hero.id)">
-                toevoegen
+            <button type="button" class="btn btn-default btn-sm" (click)="addToEncounter(hero)">
+                Toevoegen
             </button>
         </tr>
     </tbody>
