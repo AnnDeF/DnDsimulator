@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Monster } from '../../models/monster';
-import { MonsterService } from '../../services/monster.service';
-import { GameService } from '../../services/game.service';
+import { Monster } from '../../../models/monster';
+import { MonsterService } from '../../../services/monster.service';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'monsteroverview',

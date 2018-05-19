@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../../models/hero';
-import { HeroService } from '../../services/hero.service';
-import { GameService } from '../../services/game.service';
+import { Hero } from '../../../models/hero';
+import { HeroService } from '../../../services/hero.service';
+import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'heroes-overview',
@@ -25,7 +25,7 @@ export class HeroesOverviewComponent implements OnInit {
   }
 
   addToEncounter(hero: Hero){
-    this.gameService.addToEncounter(hero);
+    this.gameService.addHero(hero);
   }
 
   get listFilter(): string {

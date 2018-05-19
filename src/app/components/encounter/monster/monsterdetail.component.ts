@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Monster } from '../../models/monster';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
-import { MonsterService } from '../../services/monster.service';
+import { Monster } from '../../../models/monster';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import { MonsterService } from '../../../services/monster.service';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +14,7 @@ export class MonsterDetailComponent implements OnInit {
   private sub: any;
   private isNew: boolean;
 
-  constructor(private monsterService: MonsterService, private route: ActivatedRoute) { }
+  constructor(private monsterService: MonsterService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.refresh()
@@ -43,8 +43,8 @@ export class MonsterDetailComponent implements OnInit {
     });
   }
 
-  getMonsters() {
-    this.monsterService.getMonsters().subscribe(monsters => this.monsters = monsters)
+  return(): void {
+    this.router.navigate(['/game/monsters']);
   }
 
   addMonster() {
@@ -56,7 +56,7 @@ export class MonsterDetailComponent implements OnInit {
       AC: this.monster.AC,
       Init: this.monster.Init
     }
-    this.monsterService.updateMonster(newMonster).subscribe(monster => { this.monster = monster, this.getMonsters() });
+    this.monsterService.addMonster(newMonster).subscribe(monster => { this.monster = monster, this.return() });
   }
 
   updateMonster() {
@@ -68,7 +68,7 @@ export class MonsterDetailComponent implements OnInit {
       AC: this.monster.AC,
       Init: this.monster.Init
     }
-    this.monsterService.updateMonster(monster).subscribe(monster => { this.monster = monster, this.getMonsters() });
+    this.monsterService.updateMonster(monster).subscribe(monster => { this.monster = monster, this.return() });
   }
 
 }

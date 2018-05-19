@@ -9,19 +9,19 @@ import { AppComponent } from './app.component';
 
 import { CreaturesData } from './services/in-memory-data.service';
 
-import { LibraryComponent } from './components/library/library.component';
+import { LibraryComponent } from './components/encounter/_childcomponents/library.component';
+import { EncounterDetailComponent } from './components/encounter/_childcomponents/encounterdetail.component';
 
-import { EncounterDetailComponent } from './components/encounter/encounterdetail.component';
-import { EncounteroverviewComponent } from './components/encounter/encounteroverview.component';
+import { EncounteroverviewComponent } from './components/encounter/encounter/encounteroverview.component';
 
-import { HeroDetailComponent } from './components/hero/herodetail.component';
-import { HeroesOverviewComponent } from './components/hero/heroes-overview.component';
+import { HeroDetailComponent } from './components/encounter/hero/herodetail.component';
+import { HeroesOverviewComponent } from './components/encounter/hero/heroes-overview.component';
 
-import { MonsteroverviewComponent } from './components/monster/monsteroverview.component';
-import { MonsterDetailComponent } from './components/monster/monsterdetail.component';
+import { MonsteroverviewComponent } from './components/encounter/monster/monsteroverview.component';
+import { MonsterDetailComponent } from './components/encounter/monster/monsterdetail.component';
 
 import { HomeComponent } from './components/home/home.component';
-import { GameComponent } from './components/game/game.component';
+import { EncounterComponent } from './components/encounter/encounter.component';
 
 import { HeroService } from './services/hero.service';
 import { MonsterService } from './services/monster.service';
@@ -32,8 +32,8 @@ import { GameService } from './services/game.service';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   {
-    path: 'game',
-    component: GameComponent,
+    path: 'encounter/:id',
+    component: EncounterComponent,
     children: [
       { path: 'heroes/:id', component: HeroDetailComponent },
       { path: 'monsters/:id', component: MonsterDetailComponent },
@@ -42,7 +42,7 @@ const appRoutes: Routes = [
       { path: 'heroes', component: HeroesOverviewComponent },
       { path: 'monsters', component: MonsteroverviewComponent },
       { path: 'encounters', component: EncounteroverviewComponent },
-      { path: ':id', component: EncounterDetailComponent }
+      // { path: 'encounters/:id', component: EncounterDetailComponent }
     ]
   }
 ];
@@ -58,7 +58,7 @@ const appRoutes: Routes = [
     MonsteroverviewComponent,
     LibraryComponent,
     HomeComponent,
-    GameComponent
+    EncounterComponent
   ],
   imports: [
     CommonModule,

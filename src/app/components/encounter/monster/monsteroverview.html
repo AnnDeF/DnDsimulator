@@ -1,5 +1,5 @@
 <div class="btn-toolbar justify-content-start" role="toolbar">
-        <button type="button" class="btn btn-secondary" [routerLink]="['/monsters', 'create']">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/game/monsters', 'create']">
           Add monster
         </button>
         <div class="input-group">
@@ -24,7 +24,7 @@
             </td>
             <td>{{monster.maxHP}}</td>
             <td>{{monster.AC}}</td>
-            <button class="btn btn-secondary btn-sm" [routerLink]="['/monsters', monster.id, 'edit']">
+            <button class="btn btn-secondary btn-sm" [routerLink]="['/game/monsters', monster.id, 'edit']">
                 Wijzig
             </button>
             <button class="btn btn-secondary btn-sm" (click)="addToEncounter(monster.id)">

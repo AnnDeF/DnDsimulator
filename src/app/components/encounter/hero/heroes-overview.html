@@ -1,5 +1,5 @@
 <div class="btn-toolbar justify-content-start" role="toolbar">
-    <button type="button" class="btn btn-secondary" [routerLink]="['/heroes', 'create']">
+    <button type="button" class="btn btn-secondary" [routerLink]="['/game/heroes', 'create']">
         Add hero
     </button>
     <div class="input-group">
@@ -25,11 +25,11 @@
     <tbody>
         <tr *ngFor="let hero of filteredHeroes">
             <td>
-                <a [routerLink]="['/heroes', hero.id]">{{hero.naam}}</a>
+                <a [routerLink]="[hero.id]">{{hero.naam}}</a>
             </td>
             <td>{{hero.maxHP}}</td>
             <td>{{hero.AC}}</td>
-            <button type="button" class="btn btn-default btn-sm" [routerLink]="['/heroes', hero.id, 'edit']">
+            <button type="button" class="btn btn-default btn-sm" [routerLink]="[hero.id, 'edit']">
                 Wijzig
             </button>
             <button type="button" class="btn btn-default btn-sm" (click)="addToEncounter(hero)">

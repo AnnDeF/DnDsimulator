@@ -1,0 +1,35 @@
+<form #form="ngForm" class="d-flex flex-column" novalidate *ngIf="isNew">
+    <label for="Naam" class="col-form-label w-25"> Naam: </label>
+    <input id="Naam" type="text" class="form-control w-25" placeholder="Naam" name="naam" [(ngModel)]="_encounter._encounterNaam"
+    />
+</form>
+<h3 *ngIf="isNew">{{_encounter._encounterNaam}}</h3>
+<table class="table table-striped table-dark table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Naam</th>
+            <th scope="col">Hit Points</th>
+            <th scope="col">Armor Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let creature of _encounter?.selectedHeroes">
+            <td>{{creature.naam}}</td>
+            <td>{{creature.maxHP}}</td>
+            <td>{{creature.AC}}</td>
+            <button class="btn btn-secondary btn-sm" (click)="toggleVisibility(creature)">
+                {{isVisible ? 'In' : 'Out'}}
+            </button>
+        </tr>
+        <tr *ngFor="let creature of _encounter?.selectedMonsters">
+            <td>{{creature.naam}}</td>
+            <td>{{creature.maxHP}}</td>
+            <td>{{creature.AC}}</td>
+            <button class="btn btn-secondary btn-sm" (click)="toggleVisibility(creature)">
+                {{isVisible ? 'In' : 'Out'}}
+            </button>
+        </tr>
+    </tbody>
+</table>
+<button (click)="save_encounter()">Opslaan</button>
+<button (click)="startGame()">Start</button>
