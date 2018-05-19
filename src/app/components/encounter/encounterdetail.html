@@ -16,9 +16,11 @@
             <td>{{creature.naam}}</td>
             <td>{{creature.maxHP}}</td>
             <td>{{creature.AC}}</td>
-            <button class="btn btn-secondary btn-sm" (click)="toggleVisibility()">
+            <button class="btn btn-secondary btn-sm" (click)="toggleVisibility(creature)">
                     {{isVisible ? 'In' : 'Out'}}
             </button>
         </tr>
     </tbody>
 </table>
+<button>Opslaan</button>
+<button>Start</button>

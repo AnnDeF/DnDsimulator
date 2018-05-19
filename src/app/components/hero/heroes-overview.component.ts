@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../../models/hero';
 import { HeroService } from '../../services/hero.service';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'heroes-overview',
@@ -8,13 +9,12 @@ import { HeroService } from '../../services/hero.service';
 })
 export class HeroesOverviewComponent implements OnInit {
   private heroes: Hero[];
-  private selectedHeroes: Hero[];
   private sorted: boolean = true;
 
   private _listFilter: string;
   private filteredHeroes: Hero[] = [];
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService, private gameService:GameService) { }
 
   ngOnInit() {
     this.refresh();
@@ -25,7 +25,7 @@ export class HeroesOverviewComponent implements OnInit {
   }
 
   addToEncounter(hero: Hero){
-    this.selectedHeroes.push(hero);
+    this.gameService.addToEncounter(hero);
   }
 
   get listFilter(): string {

@@ -1,4 +1,4 @@
-export class Hero{
+export interface Creature {
     id: number;
     naam: string;
     maxHP: number; //HitPoints

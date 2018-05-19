@@ -14,7 +14,7 @@
   <li class="list-group-item flex-column" *ngFor="let encounter of encounters">
     <div class="d-flex justify-content-between">
       <label class="w-25">
-        <a [routerLink]="['/encounters/', encounter.id]">{{encounter.encounterNaam}}</a>
+        <a [routerLink]="['/game', encounter.id]">{{encounter.encounterNaam}}</a>
       </label>
       <div class="btn-group" role="group">
         <button type="button" class="btn btn-secondary" (click)="deleteEncounter()">Verwijder</button>

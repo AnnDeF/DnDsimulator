@@ -1,0 +1,18 @@
+
+.homeAchtergrond{
+    position: relative;
+    max-width: 100%;
+    height:auto;
+  }
+
+.newAdv{
+    position: absolute;
+    top:25%;
+    left:50%;
+}
+
+.idAdv{
+    position: absolute;
+    top:75%;
+    left:50%;
+}

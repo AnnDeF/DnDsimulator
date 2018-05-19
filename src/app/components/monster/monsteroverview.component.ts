@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Monster } from '../../models/monster';
 import { MonsterService } from '../../services/monster.service';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'monsteroverview',
@@ -8,14 +9,14 @@ import { MonsterService } from '../../services/monster.service';
 })
 export class MonsteroverviewComponent implements OnInit {
   private monsters: Monster[];
-  private selectedMonsters:Monster[];
+  private selectedMonsters:Monster[] = [];
   private filteredMonsters: Monster[];
   private clickedMonsters:Monster[];
 
   private sorted: boolean = false;
   private _listFilter: string;
   
-  constructor(private monsterService: MonsterService) { }
+  constructor(private monsterService: MonsterService, private gameService:GameService) { }
 
   ngOnInit() {
     this.refresh();
@@ -37,6 +38,11 @@ export class MonsteroverviewComponent implements OnInit {
   performFilter(filterBy: string): Monster[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.monsters.filter((monster: Monster) => monster.naam.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
+
+ 
+  addToEncounter(monster: Monster){
+    this.gameService.addToEncounter(monster);
   }
 
   sortByHP() {

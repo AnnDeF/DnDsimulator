@@ -20,23 +20,31 @@ import { HeroesOverviewComponent } from './components/hero/heroes-overview.compo
 import { MonsteroverviewComponent } from './components/monster/monsteroverview.component';
 import { MonsterDetailComponent } from './components/monster/monsterdetail.component';
 
+import { HomeComponent } from './components/home/home.component';
+import { GameComponent } from './components/game/game.component';
+
 import { HeroService } from './services/hero.service';
 import { MonsterService } from './services/monster.service';
 import { EncounterService } from './services/encounter.service';
+import { GameService } from './services/game.service';
+
 
 const appRoutes: Routes = [
-  { path: 'heroes/:id', component: HeroDetailComponent },
-  { path: 'monsters/:id', component: MonsterDetailComponent },
-  { path: 'encounters/:id', component: EncounterDetailComponent },
-  { path: 'heroes/:id/edit', component: HeroDetailComponent },
-  { path: 'monsters/:id/edit', component: MonsterDetailComponent },
-  { path: 'heroes', component: HeroesOverviewComponent },
-  { path: 'monsters', component: MonsteroverviewComponent },
-  { path: 'encounters', component: EncounteroverviewComponent },
-  // { path: 'about',            component: AboutChildRouteComponent,
-  //   children: [
-  //     { path: 'figure/:id',   component: FigureDetailContainerComponent }
-  //   ]},
+  { path: '', component: HomeComponent },
+  {
+    path: 'game',
+    component: GameComponent,
+    children: [
+      { path: 'heroes/:id', component: HeroDetailComponent },
+      { path: 'monsters/:id', component: MonsterDetailComponent },
+      { path: 'heroes/:id/edit', component: HeroDetailComponent },
+      { path: 'monsters/:id/edit', component: MonsterDetailComponent },
+      { path: 'heroes', component: HeroesOverviewComponent },
+      { path: 'monsters', component: MonsteroverviewComponent },
+      { path: 'encounters', component: EncounteroverviewComponent },
+      { path: ':id', component: EncounterDetailComponent }
+    ]
+  }
 ];
 
 @NgModule({
@@ -48,7 +56,9 @@ const appRoutes: Routes = [
     EncounteroverviewComponent,
     MonsterDetailComponent,
     MonsteroverviewComponent,
-    LibraryComponent
+    LibraryComponent,
+    HomeComponent,
+    GameComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +72,7 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  providers: [HeroService, MonsterService, EncounterService],
+  providers: [HeroService, MonsterService, EncounterService, GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

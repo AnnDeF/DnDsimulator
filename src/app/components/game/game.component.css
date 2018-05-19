@@ -1,0 +1,17 @@
+#headerFoto{
+    width:100%;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.library{
+    width:50%;
+}
+
+.encounterDetail{
+    width:50%;
+}

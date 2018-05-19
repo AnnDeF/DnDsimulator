@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output , EventEmitter} from '@angular/core';
 import { Encounter } from '../../models/encounter';
 import { EncounterService } from '../../services/encounter.service';
-import { HeroService } from '../../services/hero.service';
-import { MonsterService } from '../../services/monster.service';
-import { Hero } from '../../models/hero';
-import { Monster } from '../../models/monster';
 import { ActivatedRoute } from '@angular/router';
+import { GameService } from '../../services/game.service';
+import { Creature } from '../../models/creature';
 
 
 @Component({
@@ -14,17 +12,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class EncounterDetailComponent implements OnInit {
+  @Output()
+  change: EventEmitter<Creature> = new EventEmitter<Creature>();
+
   private encounter:Encounter;
   private creatures: any;
-  private selectedHeroes: Hero[];
-  private selectedMonsters:Monster[];
 
   private sub: any;
 
   private isNew:boolean;
   private isVisible:boolean = true;
 
-  constructor(private encounterService:EncounterService, private heroService:HeroService, private monsterService:MonsterService, private route:ActivatedRoute) { }
+  constructor(private encounterService:EncounterService, private route:ActivatedRoute, private gameService:GameService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -49,9 +48,8 @@ export class EncounterDetailComponent implements OnInit {
     });
   }
 
-  
 
-  toggleVisibility(){
+  toggleVisibility(creature: any){
     this.isVisible = !this.isVisible;
   }
 
