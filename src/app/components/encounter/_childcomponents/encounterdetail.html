@@ -1,9 +1,9 @@
 <form #form="ngForm" class="d-flex flex-column" novalidate *ngIf="isNew">
     <label for="Naam" class="col-form-label w-25"> Naam: </label>
-    <input id="Naam" type="text" class="form-control w-25" placeholder="Naam" name="naam" [(ngModel)]="_encounter._encounterNaam"
+    <input id="Naam" type="text" class="form-control w-25" placeholder="Naam" name="naam" [(ngModel)]="_encounter.encounterNaam"
     />
 </form>
-<h3 *ngIf="isNew">{{_encounter._encounterNaam}}</h3>
+<h3 *ngIf="!isNew">{{_encounter?.encounterNaam}}</h3>
 <table class="table table-striped table-dark table-hover">
     <thead class="thead-dark">
         <tr>
@@ -17,8 +17,8 @@
             <td>{{creature.naam}}</td>
             <td>{{creature.maxHP}}</td>
             <td>{{creature.AC}}</td>
-            <button class="btn btn-secondary btn-sm" (click)="toggleVisibility(creature)">
-                {{isVisible ? 'In' : 'Out'}}
+            <button (click)="removeFromEncounter()">
+                verwijder
             </button>
         </tr>
         <tr *ngFor="let creature of _encounter?.selectedMonsters">
@@ -28,8 +28,12 @@
             <button class="btn btn-secondary btn-sm" (click)="toggleVisibility(creature)">
                 {{isVisible ? 'In' : 'Out'}}
             </button>
+            <button (click)="removeFromEncounter()">
+                verwijder
+            </button>
         </tr>
     </tbody>
 </table>
-<button (click)="save_encounter()">Opslaan</button>
+<button (click)="saveEncounter()">Opslaan</button>
 <button (click)="startGame()">Start</button>
+<button (click)="clearEncounter()">Clear</button>

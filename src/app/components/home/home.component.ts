@@ -8,6 +8,10 @@ import { GameService } from '../../services/game.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  private showText: boolean = false;
+  private showNumber: boolean = false;
+  private encounterNaam: string;
+  private encounterId: number;
 
   constructor(
     private router: Router,
@@ -17,7 +21,38 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  startNewGame() {
-    this.gameService.startNewGame();
+  public onKeyForNew(event: KeyboardEvent) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+      this.encounterNaam = (<HTMLInputElement>event.target).value
+      this.startNewGame(this.encounterNaam);
+    }
   }
+
+  public onKeyForExisting(event: KeyboardEvent) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+      this.encounterId = (<HTMLInputElement>event.target).valueAsNumber;
+      this.startExistingGame(this.encounterId);
+    }
+  }
+
+  startNewGame(value: string) {
+    this.gameService.startNewGame(value);
+  }
+
+  startExistingGame(value:number){
+    this.gameService.openEncounter(value);
+  }
+
+  showTextField() {
+    this.showNumber = false;
+    this.showText = !this.showText;
+  }
+
+  showNumberField() {
+    this.showText = false;
+    this.showNumber = !this.showNumber;
+  }
+
 }

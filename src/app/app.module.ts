@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { CreaturesData } from './services/in-memory-data.service';
 
@@ -64,6 +65,7 @@ const appRoutes: Routes = [
     CommonModule,
     BrowserModule,
     FormsModule,
+    AngularFontAwesomeModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       CreaturesData, { dataEncapsulation: false }

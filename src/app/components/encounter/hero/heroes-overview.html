@@ -1,5 +1,5 @@
 <div class="btn-toolbar justify-content-start" role="toolbar">
-    <button type="button" class="btn btn-secondary" [routerLink]="['/game/heroes', 'create']">
+    <button type="button" class="btn btn-secondary" [routerLink]="['create']">
         Add hero
     </button>
     <div class="input-group">
@@ -10,7 +10,6 @@
     </div>
 </div>
 <table class="table table-striped table-dark table-hover" *ngIf="filteredHeroes">
-    {{selectedHeroes |json}}
     <thead class="thead-dark">
         <tr>
             <th scope="col">Naam</th>
@@ -29,10 +28,10 @@
             </td>
             <td>{{hero.maxHP}}</td>
             <td>{{hero.AC}}</td>
-            <button type="button" class="btn btn-default btn-sm" [routerLink]="[hero.id, 'edit']">
+            <button type="button" class="btn btn-secondary btn-sm" [routerLink]="[hero.id, 'edit']">
                 Wijzig
             </button>
-            <button type="button" class="btn btn-default btn-sm" (click)="addToEncounter(hero)">
+            <button type="button" class="btn btn-secondary btn-sm" (click)="addToEncounter(hero)">
                 Voeg toe
             </button>
         </tr>

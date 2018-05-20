@@ -14,8 +14,7 @@ import { Creature } from '../../../models/creature';
 export class EncounterDetailComponent implements OnInit {
   @Output()
   change: EventEmitter<Creature> = new EventEmitter<Creature>();
-
-  private _encounter: Encounter;
+  private _encounter: Encounter = null;
 
   @Input()
   set encounter(encounter: Encounter) {
@@ -50,8 +49,14 @@ export class EncounterDetailComponent implements OnInit {
 
   removeFromEncounter() { }
 
-  clearEncounter() { }
-
-
+  clearEncounter(encounter) { 
+    const encounterToUpdate= {
+      id: this._encounter.id,
+      encounterNaam: this._encounter.encounterNaam,
+      selectedHeroes: [],
+      selectedMonsters: []
+  }
+  this.encounterService.updateEncounter(encounter).subscribe(encounter => { this._encounter = encounter });
+}
 
 }

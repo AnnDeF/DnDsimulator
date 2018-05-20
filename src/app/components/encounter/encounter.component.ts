@@ -23,6 +23,11 @@ export class EncounterComponent implements OnInit {
       this.encounter.selectedHeroes.push(hero);
     });
 
+    this.gameService.onMonsterSelected.subscribe(monster => {
+      this.encounter.selectedMonsters.push(monster);
+    });
+
+
     this.sub = this.route.params.subscribe(params => {
       let Id = +params['id']; // (+) converts string 'id' to a number
 

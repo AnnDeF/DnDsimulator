@@ -9,20 +9,25 @@ import { Subject, Observable } from 'rxjs';
 
 @Injectable()
 export class GameService {
-  private selectedMonsters: Monster[] = [];
-
   private _onHeroSelected = new Subject<Hero>();
   public get onHeroSelected(): Observable<Hero> { return this._onHeroSelected.asObservable(); };
+
+  private _onMonsterSelected = new Subject<Monster>();
+  public get onMonsterSelected(): Observable<Monster> { return this._onMonsterSelected.asObservable(); };
 
   constructor(
     private encounterService: EncounterService,
     private router: Router
   ) { }
 
-  startNewGame(): void {
+  startNewGame(encounterNaam: string): void {
     this.encounterService.addEncounter(new Encounter())
       .pipe(map((encounter) => {
-        this.router.navigate(['/encounter', encounter.id]);
+        this.router.navigate(['/encounter']);
+        encounter.encounterNaam = encounterNaam;
+        encounter.id = null;
+        encounter.selectedHeroes = [];
+        encounter.selectedMonsters = []
       })
       ).subscribe();
   }
@@ -35,14 +40,8 @@ export class GameService {
     this._onHeroSelected.next(hero);
   }
 
-  addToEncounter(object: Object) {
-    if (object instanceof Monster) {
-      this.selectedMonsters.push(object);
-    }
-  }
-
-  getSelectedMonsters() {
-    return this.selectedMonsters;
+  addMonster(monster: Monster){
+    this._onMonsterSelected.next(monster);
   }
 
 }

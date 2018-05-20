@@ -1,5 +1,5 @@
 <div class="btn-toolbar justify-content-start" role="toolbar">
-  <button type="button" class="btn btn-secondary" [routerLink]="['/game/encounters', 'create']">
+  <button type="button" class="btn btn-secondary" [routerLink]="['create']">
     New encounter
   </button>
   <div class="input-group">
@@ -14,7 +14,7 @@
   <li class="list-group-item flex-column" *ngFor="let encounter of encounters">
     <div class="d-flex justify-content-between">
       <label class="w-25">
-        <a [routerLink]="['/encounter', encounter.id]">{{encounter.encounterNaam}}</a>
+        <a [routerLink]="[encounter.id]">{{encounter.encounterNaam}}</a>
       </label>
       <div class="btn-group" role="group">
         <button type="button" class="btn btn-secondary" (click)="deleteEncounter()">Verwijder</button>

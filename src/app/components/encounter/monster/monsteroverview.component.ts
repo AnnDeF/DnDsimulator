@@ -9,13 +9,11 @@ import { GameService } from '../../../services/game.service';
 })
 export class MonsteroverviewComponent implements OnInit {
   private monsters: Monster[];
-  private selectedMonsters:Monster[] = [];
-  private filteredMonsters: Monster[];
-  private clickedMonsters:Monster[];
-
   private sorted: boolean = false;
-  private _listFilter: string;
   
+  private _listFilter: string;
+  private filteredMonsters: Monster[];
+
   constructor(private monsterService: MonsterService, private gameService:GameService) { }
 
   ngOnInit() {
@@ -24,6 +22,10 @@ export class MonsteroverviewComponent implements OnInit {
 
   refresh() {
     this.monsterService.getMonsters().subscribe(monsters => {this.monsters = monsters; this.filteredMonsters = monsters});
+  }
+
+  addToEncounter(monster:Monster){
+    this.gameService.addMonster(monster)
   }
 
   get listFilter(): string {
@@ -40,10 +42,6 @@ export class MonsteroverviewComponent implements OnInit {
     return this.monsters.filter((monster: Monster) => monster.naam.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
- 
-  addToEncounter(monster: Monster){
-    this.gameService.addToEncounter(monster);
-  }
 
   sortByHP() {
     this.sorted = !this.sorted;
