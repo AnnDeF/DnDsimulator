@@ -23,17 +23,17 @@ export class GameService {
   startNewGame(encounterNaam: string): void {
     this.encounterService.addEncounter(new Encounter())
       .pipe(map((encounter) => {
-        this.router.navigate(['/encounter']);
+        this.router.navigate(['/encounter', encounter.id]);
         encounter.encounterNaam = encounterNaam;
-        encounter.id = null;
+        encounter.id = encounter.id;
         encounter.selectedHeroes = [];
         encounter.selectedMonsters = []
       })
       ).subscribe();
   }
 
-  openEncounter(number: number) {
-    this.encounterService.getEncounter(number);
+  openEncounter(encounterId: number): void {
+    this.encounterService.getEncounter(encounterId);
   }
 
   addHero(hero: Hero) {
@@ -42,6 +42,11 @@ export class GameService {
 
   addMonster(monster: Monster){
     this._onMonsterSelected.next(monster);
+  }
+
+
+  rollInitiative():number{
+    return Math.floor(Math.random() * 20) + 1 ;
   }
 
 }

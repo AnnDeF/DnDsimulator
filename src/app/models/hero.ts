@@ -4,5 +4,5 @@ export class Hero{
     maxHP: number; //HitPoints
     battleHP: number;
     AC: number; //ArmorClass 
-    Init: boolean; //initiatiefModifier
+    Init: number; //initiatiefModifier
 }

@@ -28,22 +28,23 @@ import { HeroService } from './services/hero.service';
 import { MonsterService } from './services/monster.service';
 import { EncounterService } from './services/encounter.service';
 import { GameService } from './services/game.service';
+import { FightComponent } from './components/encounter/_childcomponents/fight.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   {
-    path: 'encounter/:id',
+    path: 'main/:id',
     component: EncounterComponent,
     children: [
       { path: 'heroes/:id', component: HeroDetailComponent },
       { path: 'monsters/:id', component: MonsterDetailComponent },
       { path: 'heroes/:id/edit', component: HeroDetailComponent },
       { path: 'monsters/:id/edit', component: MonsterDetailComponent },
+      {path: 'encounters/:id', component: EncounterDetailComponent},
       { path: 'heroes', component: HeroesOverviewComponent },
       { path: 'monsters', component: MonsteroverviewComponent },
       { path: 'encounters', component: EncounteroverviewComponent },
-      // { path: 'encounters/:id', component: EncounterDetailComponent }
     ]
   }
 ];
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
     MonsteroverviewComponent,
     LibraryComponent,
     HomeComponent,
-    EncounterComponent
+    EncounterComponent,
+    FightComponent
   ],
   imports: [
     CommonModule,

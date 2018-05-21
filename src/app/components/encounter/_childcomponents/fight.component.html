@@ -1,0 +1,6 @@
+<h6>Roll initiative</h6>
+<ul class="list-group" *ngFor="let creature of creatures">
+<li class="list-group-item">{{creature.naam}} ({{creature.Init}}) 
+    <input type="number" *ngFor="let number of initiativeNumbers">
+</li>
+</ul>

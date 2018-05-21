@@ -46,7 +46,8 @@ export class HeroDetailComponent implements OnInit {
     }
 
     return(): void {
-        this.router.navigate(['encounter/:id/heroes']);
+        this.router.navigate(['../'], { relativeTo: this.route });
+    
     }
 
     addHero() {

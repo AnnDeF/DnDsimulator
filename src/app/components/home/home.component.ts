@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from '../../services/game.service';
+import { Encounter } from '../../models/encounter';
 
 @Component({
   selector: 'home',
@@ -10,6 +11,7 @@ import { GameService } from '../../services/game.service';
 export class HomeComponent implements OnInit {
   private showText: boolean = false;
   private showNumber: boolean = false;
+  private encounter:Encounter;
   private encounterNaam: string;
   private encounterId: number;
 
@@ -42,6 +44,7 @@ export class HomeComponent implements OnInit {
   }
 
   startExistingGame(value:number){
+    console.log("stap 2")
     this.gameService.openEncounter(value);
   }
 

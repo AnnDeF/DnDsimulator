@@ -38,6 +38,8 @@ export class EncounterComponent implements OnInit {
     });
   }
 
+  
+
   //   Heal(heal: number) {
   //     var newHP = this.hero.battleHP + heal;
 

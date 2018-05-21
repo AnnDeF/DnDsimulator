@@ -17,7 +17,7 @@
             <td>{{creature.naam}}</td>
             <td>{{creature.maxHP}}</td>
             <td>{{creature.AC}}</td>
-            <button (click)="removeFromEncounter()">
+            <button (click)="removeHeroFromEncounter(creature)">
                 verwijder
             </button>
         </tr>
@@ -28,12 +28,16 @@
             <button class="btn btn-secondary btn-sm" (click)="toggleVisibility(creature)">
                 {{isVisible ? 'In' : 'Out'}}
             </button>
-            <button (click)="removeFromEncounter()">
+            <button (click)="removeMonsterFromEncounter(creature)">
                 verwijder
             </button>
         </tr>
     </tbody>
 </table>
-<button (click)="saveEncounter()">Opslaan</button>
-<button (click)="startGame()">Start</button>
-<button (click)="clearEncounter()">Clear</button>
+<button (click)="clearEncounter()" *ngIf="!showGame">Clear</button>
+<button (click)="saveEncounter()" *ngIf="!showGame">Opslaan</button>
+<button (click)="startGame()" *ngIf="!showGame">Start</button>
+
+
+<fight *ngIf="showGame">
+</fight>

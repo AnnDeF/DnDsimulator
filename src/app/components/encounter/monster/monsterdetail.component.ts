@@ -44,7 +44,7 @@ export class MonsterDetailComponent implements OnInit {
   }
 
   return(): void {
-    this.router.navigate(['/monsters']);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   addMonster() {
@@ -56,7 +56,7 @@ export class MonsterDetailComponent implements OnInit {
       AC: this.monster.AC,
       Init: this.monster.Init
     }
-    this.monsterService.addMonster(newMonster).subscribe(monster => { this.monster = monster });
+    this.monsterService.addMonster(newMonster).subscribe(monster => { this.monster = monster, this.return() });
   }
 
   updateMonster() {
