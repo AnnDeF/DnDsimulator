@@ -16,8 +16,8 @@ import { Monster } from '../../../models/monster';
 export class EncounterDetailComponent implements OnInit {
   @Output()
   change: EventEmitter<Creature> = new EventEmitter<Creature>();
-  private _encounter: Encounter = null;
 
+  private _encounter: Encounter = null;
   @Input()
   set encounter(encounter: Encounter) {
     this._encounter = encounter;
@@ -26,7 +26,7 @@ export class EncounterDetailComponent implements OnInit {
 
   private isNew: boolean;
   private isVisible: boolean = true;
-  private showGame: boolean=false;
+  private initiativeNumbers: number[] = [];
 
   constructor(
     private encounterService: EncounterService,
@@ -34,6 +34,10 @@ export class EncounterDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gameService.initiativeNumbers.subscribe(newNumbers => {
+      this.initiativeNumbers = newNumbers;
+      console.log(this.initiativeNumbers);
+    })
   }
 
   toggleVisibility(creature: any) {
@@ -41,37 +45,55 @@ export class EncounterDetailComponent implements OnInit {
   }
 
   saveEncounter() {
-    const encounter = {
-      id: this._encounter.id,
-      encounterNaam: this._encounter.encounterNaam,
-      selectedHeroes: this._encounter.selectedHeroes,
-      selectedMonsters: this._encounter.selectedMonsters
-    }
-    this.encounterService.updateEncounter(encounter).subscribe(encounter => this._encounter = encounter)
+    this.encounterService.updateEncounter(this._encounter).subscribe();
   }
 
-  removeMonsterFromEncounter(monster:Monster) { 
+  removeMonsterFromEncounter(monster: Monster) {
     const idx = this._encounter.selectedMonsters.indexOf(monster);
-    this._encounter.selectedMonsters.splice(idx,1)
+    this._encounter.selectedMonsters.splice(idx, 1)
   }
 
-  removeHeroFromEncounter(hero:Hero){
+  removeHeroFromEncounter(hero: Hero) {
     const idx = this._encounter.selectedHeroes.indexOf(hero);
-    this._encounter.selectedHeroes.splice(idx,1)
+    this._encounter.selectedHeroes.splice(idx, 1)
   }
 
-  clearEncounter(encounter) { 
-    const encounterToUpdate= {
-      id: this._encounter.id,
-      encounterNaam: this._encounter.encounterNaam,
-      selectedHeroes: [],
-      selectedMonsters: []
+  clearEncounter(encounter) {
+    this._encounter.selectedHeroes = [];
+    this._encounter.selectedMonsters = [];
+    this.encounterService.updateEncounter(this._encounter).subscribe();
   }
-  this.encounterService.updateEncounter(encounterToUpdate).subscribe(encounter => { this._encounter = encounter });
-}
 
-  startGame(){
-    this.showGame = !this.showGame;
+  startGame() {
+    this.gameService.startGame();
   }
+
+  // public getInitiative(creature: Creature) : number {
+  //   const idx = this.creatures.indexOf(creature);
+  //   return this.initiativeNumbers[idx];
+  // }
+
+  // public getTotal(creature: Creature) : number {
+  //   const init = creature.init;
+  //   const rolled = this.getInitiative(creature);
+
+  //   if ((init + rolled) > 20)  {
+  //     return 20;
+  //   }
+
+  //   return (init + rolled);
+  // }
+
+  // sortByInitiative(a: Creature, b: Creature) : number {
+  //   if (this.initiativeNumbers.length == 0)
+  //     return b.init - a.init;
+    
+  //   const totalA = this.getTotal(a);
+  //   const totalB = this.getTotal(b);
+    
+  //   const result = totalB - totalA;
+
+  //   return result;
+  // }
 
 }

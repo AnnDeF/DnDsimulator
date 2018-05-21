@@ -1,12 +1,13 @@
-
 <img class="homeAchtergrond" src="../../../assets/home-background.jpg">
 
 <button class="newAdv" (click)="showTextField()">
-    <img src ="../../../assets/new-adventure.png" >
+    <img src="../../../assets/new-adventure.png">
 </button>
-<input *ngIf="showText" id="encounterNaam" type="text" class="form-control w-25" placeholder="Naam Encounter" name="naam" (keyup)="onKeyForNew($event)" />
+<input *ngIf="showText" id="encounterNaam" type="text" class="form-control w-25" placeholder="Naam Encounter" name="naam"
+    (keyup)="onKeyForNew($event)" />
 
-<button class="idAdv" (click)="showNumberField()"><img src="../../../assets/AdventureId.png"></button>
-<input *ngIf="showNumber" id="encounterId" type="number" class="form-control w-25" placeholder="0" name="encounterId" (keyup)="onKeyForExisting($event)" />
-
-
+<button class="idAdv" (click)="showNumberField()">
+    <img src="../../../assets/AdventureId.png">
+</button>
+<input *ngIf="showNumber" id="encounterId" type="number" class="form-control w-25" placeholder="0" name="encounterId" (keyup)="onKeyForExisting($event)"
+/>

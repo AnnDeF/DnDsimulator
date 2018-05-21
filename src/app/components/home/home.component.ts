@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameService } from '../../services/game.service';
 import { Encounter } from '../../models/encounter';
+import { EncounterService } from '../../services/encounter.service';
 
 @Component({
   selector: 'home',
@@ -26,26 +27,18 @@ export class HomeComponent implements OnInit {
   public onKeyForNew(event: KeyboardEvent) {
     event.preventDefault();
     if (event.keyCode === 13) {
-      this.encounterNaam = (<HTMLInputElement>event.target).value
-      this.startNewGame(this.encounterNaam);
+      this.encounterNaam = (<HTMLInputElement>event.target).value;
+      this.gameService.startNewEncounter(this.encounterNaam);
     }
   }
 
   public onKeyForExisting(event: KeyboardEvent) {
     event.preventDefault();
-    if (event.keyCode === 13) {
-      this.encounterId = (<HTMLInputElement>event.target).valueAsNumber;
-      this.startExistingGame(this.encounterId);
+    if (event.keyCode === 13) 
+    {
+      const value = (<HTMLInputElement>event.target).valueAsNumber;
+      this.gameService.openEncounter(value);
     }
-  }
-
-  startNewGame(value: string) {
-    this.gameService.startNewGame(value);
-  }
-
-  startExistingGame(value:number){
-    console.log("stap 2")
-    this.gameService.openEncounter(value);
   }
 
   showTextField() {

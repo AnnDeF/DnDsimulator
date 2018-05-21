@@ -1,6 +1,9 @@
 <h6>Roll initiative</h6>
-<ul class="list-group" *ngFor="let creature of creatures">
-<li class="list-group-item">{{creature.naam}} ({{creature.Init}}) 
-    <input type="number" *ngFor="let number of initiativeNumbers">
-</li>
+<ul class="list-group" *ngFor="let creature of sortedCreatures">
+    <li class="list-group-item">{{creature.naam}} ({{creature.init}})
+        <input type="number" [ngModel]="getInitiative(creature)" (ngModelChange)="onInitiativeChanged($event, creature)">
+        <span style="float: right;">{{getTotal(creature)}}</span>
+    </li>
 </ul>
+
+<button (click)="gameService.initiativeDecided(initiativeNumbers)">Start</button>

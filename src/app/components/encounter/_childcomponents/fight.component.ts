@@ -12,39 +12,74 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class FightComponent implements OnInit {
-  private initiativeNumbers:number[];
-  private encounter:Encounter;
-  private creatures:Creature[];
-  private sub:any;
+  private initiativeNumbers: number[];
+  private creatures: Creature[];
+  private sortedCreatures: Creature[];
+  private sub: any;
 
-  constructor(private encounterService: EncounterService, private gameService:GameService, private route:ActivatedRoute) { }
+  private _encounter: Encounter = null;
+  @Input()
+  set encounter(encounter: Encounter) {
+    this._encounter = encounter;
+    if (this._encounter == null) return;
+    this.creatures = this._encounter.selectedHeroes.concat(this._encounter.selectedMonsters);
+  }
+
+  constructor(
+    private encounterService: EncounterService,
+    private gameService: GameService, private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      let Id = +params['id']; // (+) converts string 'id' to a number
-
-      this.encounterService.getEncounter(Id)
-        .subscribe(encounter => {
-          this.encounter = encounter,
-          this.creatures = this.encounter.selectedHeroes.concat(this.encounter.selectedMonsters);
-        });
-    });
-   
     this.decideInitiative();
   }
 
-  decideInitiative(): Number[]{
-    for (let i = 0; i<this.creatures.length; i++){
+  decideInitiative() {
+    this.initiativeNumbers = [];
+
+    this.creatures.forEach(creature => {
       this.initiativeNumbers.push(this.gameService.rollInitiative());
-      }
-      return this.initiativeNumbers;
+    });
+    
+    this.sort();
+  }
+
+  public getInitiative(creature: Creature) : number {
+    const idx = this.creatures.indexOf(creature);
+    return this.initiativeNumbers[idx];
+  }
+
+  public getTotal(creature: Creature) : number {
+    const init = creature.init;
+    const rolled = this.getInitiative(creature);
+
+    if ((init + rolled) > 20)  {
+      return 20;
     }
 
-    sortByInitiative(){
-      let newValues=[];
-     for(let i=0; i<this.creatures.length; i++){
-       newValues.push(this.creatures[i].Init + this.initiativeNumbers[i]);
-     }
-    }
+    return (init + rolled);
+  }
 
+  public onInitiativeChanged(newValue: number, creature: Creature) {
+    const idx = this.creatures.indexOf(creature);
+    this.initiativeNumbers[idx] = newValue;
+
+    this.sort();
+  }
+
+  private sort() : void {
+    this.sortedCreatures = this.creatures.concat().sort((a, b) => this.sortByInitiative(a, b));
+  }
+
+  sortByInitiative(a: Creature, b: Creature) : number {
+    if (this.initiativeNumbers.length == 0)
+      return b.init - a.init;
+    
+    const totalA = this.getTotal(a);
+    const totalB = this.getTotal(b);
+    
+    const result = totalB - totalA;
+
+    return result;
+  }
 }

@@ -34,10 +34,7 @@
         </tr>
     </tbody>
 </table>
-<button (click)="clearEncounter()" *ngIf="!showGame">Clear</button>
-<button (click)="saveEncounter()" *ngIf="!showGame">Opslaan</button>
-<button (click)="startGame()" *ngIf="!showGame">Start</button>
 
-
-<fight *ngIf="showGame">
-</fight>
+<button (click)="clearEncounter()" *ngIf="!gameService.showInitiative">Clear</button>
+<button (click)="saveEncounter()" *ngIf="!gameService.showInitiative">Opslaan</button>
+<button (click)="startGame()" *ngIf="!gameService.showInitiative">Start</button>

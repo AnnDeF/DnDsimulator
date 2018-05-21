@@ -1,8 +1,10 @@
-export class Monster  {
+import { Creature } from "./creature";
+
+export class Monster implements Creature {
     id: number;
     naam: string;
     maxHP: number; //HitPoints
     battleHP: number;
     AC: number; //ArmorClass 
-    Init: number; //initiatiefModifier
+    init: number; //initiatiefModifier
 }

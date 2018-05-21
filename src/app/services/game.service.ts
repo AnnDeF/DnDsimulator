@@ -15,38 +15,62 @@ export class GameService {
   private _onMonsterSelected = new Subject<Monster>();
   public get onMonsterSelected(): Observable<Monster> { return this._onMonsterSelected.asObservable(); };
 
+  private _encounter = new Subject<Encounter>();
+  public get encounter(): Observable<Encounter> { return this._encounter.asObservable(); };
+
+  private _initiativeNumbers = new Subject<number[]>();
+  public get initiativeNumbers(): Observable<number[]> { return this._initiativeNumbers.asObservable(); };
+
+  private currentEncounter : Encounter;
+  private showInitiative : boolean = false;
+
   constructor(
     private encounterService: EncounterService,
     private router: Router
   ) { }
 
-  startNewGame(encounterNaam: string): void {
-    this.encounterService.addEncounter(new Encounter())
+  startNewEncounter(encounterNaam: string): void {
+    const encounter = new Encounter();
+    encounter.encounterNaam = encounterNaam;
+    encounter.selectedHeroes = [];
+    encounter.selectedMonsters = [];
+
+    this.encounterService.addEncounter(encounter)
       .pipe(map((encounter) => {
-        this.router.navigate(['/encounter', encounter.id]);
-        encounter.encounterNaam = encounterNaam;
-        encounter.id = encounter.id;
-        encounter.selectedHeroes = [];
-        encounter.selectedMonsters = []
+        this.router.navigate(['/main', encounter.id]);
+        this.currentEncounter = encounter;
+        this._encounter.next(encounter);
       })
       ).subscribe();
   }
 
   openEncounter(encounterId: number): void {
-    this.encounterService.getEncounter(encounterId);
+    this.encounterService.getEncounter(encounterId)
+      .subscribe(encounter => {
+        this.router.navigate(['/main', encounter.id]);
+        this.currentEncounter = encounter;
+        this._encounter.next(encounter);
+      });
   }
 
   addHero(hero: Hero) {
     this._onHeroSelected.next(hero);
   }
 
-  addMonster(monster: Monster){
+  addMonster(monster: Monster) {
     this._onMonsterSelected.next(monster);
   }
 
-
-  rollInitiative():number{
-    return Math.floor(Math.random() * 20) + 1 ;
+  public startGame() {
+    this.showInitiative = true;
   }
 
+  rollInitiative(): number {
+    return Math.floor(Math.random() * 20) + 1;
+  }
+
+  public initiativeDecided(initiativeNumbers: number[]) {
+    this.showInitiative = false;
+    this._initiativeNumbers.next(initiativeNumbers);
+  }
 }

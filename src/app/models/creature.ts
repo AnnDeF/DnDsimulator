@@ -4,5 +4,5 @@ export interface Creature {
     maxHP: number; //HitPoints
     battleHP: number;
     AC: number; //ArmorClass 
-    Init: number; //initiatiefModifier
+    init: number; //initiatiefModifier
 }

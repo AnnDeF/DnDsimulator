@@ -6,7 +6,9 @@
   <section class="library">
     <library></library>
   </section>
+
   <section class="encounterDetail">
     <encounterdetail [encounter]="encounter"></encounterdetail>
+    <fight [encounter]="encounter" *ngIf="gameService.showInitiative"></fight>
   </section>
 </div>
