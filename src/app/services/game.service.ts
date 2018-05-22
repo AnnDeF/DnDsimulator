@@ -23,6 +23,7 @@ export class GameService {
 
   private currentEncounter : Encounter;
   private showInitiative : boolean = false;
+  private showFight: boolean = false;
 
   constructor(
     private encounterService: EncounterService,
@@ -71,6 +72,10 @@ export class GameService {
 
   public initiativeDecided(initiativeNumbers: number[]) {
     this.showInitiative = false;
+    this.showFight = true;
+
+    this.currentEncounter.selectedMonsters.forEach(monster => monster.isVisible = true);
+
     this._initiativeNumbers.next(initiativeNumbers);
   }
 }

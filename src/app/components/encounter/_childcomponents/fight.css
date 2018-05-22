@@ -1,4 +1,14 @@
 
 .active{
     background-color: yellow;
+    color: #000;
+    font-weight: bold;
+}
+
+.isInvisible {
+    opacity: 0.5;
+}
+
+.isDying {
+    border: 2px solid red;
 }

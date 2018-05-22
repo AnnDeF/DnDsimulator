@@ -4,6 +4,7 @@ import { GameService } from '../../../services/game.service';
 import { Creature } from '../../../models/creature';
 import { Encounter } from '../../../models/encounter';
 import { ActivatedRoute } from '@angular/router';
+import { Monster } from '../../../models/monster';
 
 
 @Component({
@@ -16,15 +17,14 @@ export class FightComponent implements OnInit {
   private initiativeNumbers: number[];
   private creatures: Creature[];
   private sortedCreatures: Creature[];
-  private heroes:Creature[];
-  private idx:number = 0;
+  private heroes: Creature[];
+  private idx: number = 0;
   private sub: any;
 
-  private showStart:boolean = true;
+  private showStart: boolean = true;
   private showPlayButtons: boolean = false;
-  
-
   private _encounter: Encounter = null;
+
   @Input()
   set encounter(encounter: Encounter) {
     this._encounter = encounter;
@@ -48,20 +48,20 @@ export class FightComponent implements OnInit {
     this.creatures.forEach(creature => {
       this.initiativeNumbers.push(this.gameService.rollInitiative());
     });
-    
+
     this.sort();
   }
 
-  public getInitiative(creature: Creature) : number {
+  public getInitiative(creature: Creature): number {
     const idx = this.creatures.indexOf(creature);
     return this.initiativeNumbers[idx];
   }
 
-  public getTotal(creature: Creature) : number {
+  public getTotal(creature: Creature): number {
     const init = creature.init;
     const rolled = this.getInitiative(creature);
 
-    if ((init + rolled) > 20)  {
+    if ((init + rolled) > 20) {
       return 20;
     }
 
@@ -75,45 +75,77 @@ export class FightComponent implements OnInit {
     this.sort();
   }
 
-  private sort() : void {
+  private sort(): void {
     this.sortedCreatures = this.creatures.concat().sort((a, b) => this.sortByInitiative(a, b));
   }
 
-  sortByInitiative(a: Creature, b: Creature) : number {
+  sortByInitiative(a: Creature, b: Creature): number {
     if (this.initiativeNumbers.length == 0)
       return b.init - a.init;
-    
+
     const totalA = this.getTotal(a);
     const totalB = this.getTotal(b);
-    
+
     const result = totalB - totalA;
 
     return result;
   }
 
-
   // Spel
-  toggleVisibility():boolean{
-    return true;
+  toggleVisibility(monster: Monster) {
+    monster.isVisible = !monster.isVisible;
+    // TODO:
+    //this.monsterService.update
   }
 
-  removeFromFight(creature: Creature){
-    if(!creature.isMonster)
-    {
-     if(confirm("Are you sure you want to delete this hero?")){
-      const idx = this.creatures.indexOf(creature);
-      this.creatures.splice(idx, 1)
-     }
-     else {"Continue game"}
+  removeFromFight(creature: Creature) {
+    if (!creature.isMonster) {
+      if (confirm("Are you sure you want to delete this hero?")) {
+        const idx = this.sortedCreatures.indexOf(creature);
+        this.sortedCreatures.splice(idx, 1)
+      }
     }
   }
 
-  previous(){
-    (this.idx)--;
+  previous() {
+    const usefullCreatures = this.getUseFullCreatures();
+    const currentCreature = this.sortedCreatures[this.idx];
+    let usefullIdx = usefullCreatures.indexOf(currentCreature);
+
+    if (usefullIdx == 0) {
+      usefullIdx = usefullCreatures.length - 1;
+    } else {
+      usefullIdx--;
+    }
+
+    const nextCreature = usefullCreatures[usefullIdx];
+    this.idx = this.sortedCreatures.indexOf(nextCreature);
   }
 
-  next(){
-    (this.idx)++;
+  next() {
+    const usefullCreatures = this.getUseFullCreatures();
+    const currentCreature = this.sortedCreatures[this.idx];
+    let usefullIdx = usefullCreatures.indexOf(currentCreature);
+
+    if (usefullIdx == usefullCreatures.length - 1) {
+      usefullIdx = 0;
+    } else {
+      usefullIdx++;
+    }
+
+    const nextCreature = usefullCreatures[usefullIdx];
+    this.idx = this.sortedCreatures.indexOf(nextCreature);
+  }
+
+  private getUseFullCreatures(): Creature[] {
+    let usefullCreatures = this.sortedCreatures.filter(creature => {
+      if (creature.isMonster && creature['isVisible'] == false)
+        return false;
+        
+      return true;
+    });
+
+    return usefullCreatures;
   }
 
   public onHealthPositiveChanged(newValue: number, creature: Creature) {
@@ -121,8 +153,7 @@ export class FightComponent implements OnInit {
     const healPower = newValue;
     const newBattleHP = healPower + health;
 
-    if (newBattleHP > creature.maxHP)
-      {return creature.maxHP}
+    if (newBattleHP > creature.maxHP) { return creature.maxHP }
     else return newBattleHP;
 
   }

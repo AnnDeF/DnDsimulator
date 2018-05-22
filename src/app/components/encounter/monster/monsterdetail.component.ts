@@ -39,14 +39,15 @@ export class MonsterDetailComponent implements OnInit {
       }
       else {
         this.monster = {
-          id: 0,
-          naam: '',
-          maxHP: 0,
-          battleHP: 0,
-          AC: 0,
-          init: 0,
-          isMonster:true
-        }
+            id: 0,
+            naam: '',
+            maxHP: 0,
+            battleHP: 0,
+            AC: 0,
+            init: 0,
+            isVisible: true,
+            isMonster: true
+        };
       }
     });
   }
@@ -63,7 +64,8 @@ export class MonsterDetailComponent implements OnInit {
       battleHP: this.monster.maxHP,
       AC: this.monster.AC,
       init: this.monster.init,
-      isMonster:true
+      isVisible: true,
+      isMonster: true
     }
     this.monsterService.addMonster(newMonster).subscribe(monster => { this.monster = monster, this.return() });
   }
@@ -76,7 +78,8 @@ export class MonsterDetailComponent implements OnInit {
       battleHP: this.monster.maxHP,
       AC: this.monster.AC,
       init: this.monster.init,
-      isMonster:true
+      isVisible: true,
+      isMonster: true
     }
     this.monsterService.updateMonster(monster).subscribe(monster => { this.monster = monster, this.return() });
   }

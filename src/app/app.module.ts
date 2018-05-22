@@ -29,6 +29,7 @@ import { MonsterService } from './services/monster.service';
 import { EncounterService } from './services/encounter.service';
 import { GameService } from './services/game.service';
 import { FightComponent } from './components/encounter/_childcomponents/fight.component';
+import { RollInitiativeComponent } from './components/encounter/_childcomponents/roll-initiative.component';
 
 import { BtnSaveComponent } from './components/shared/btn-save.component';
 import { DetailComponent } from './components/shared/detail.component';
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
     HomeComponent,
     EncounterComponent,
     FightComponent,
+    RollInitiativeComponent,
     BtnSaveComponent,
     DetailComponent,
     ListOverviewComponent,

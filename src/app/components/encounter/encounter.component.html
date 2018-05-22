@@ -8,8 +8,10 @@
   </section>
 
   <section class="encounterDetail">
-    <encounterdetail 
-      [encounter]="encounter"></encounterdetail>
-    <fight [encounter]="encounter" *ngIf="gameService.showInitiative"></fight>
+    <h3>{{encounter.encounterNaam}}</h3>
+
+    <encounterdetail [encounter]="encounter" *ngIf="!gameService.showInitiative && !gameService.showFight"></encounterdetail>
+    <roll-initiative [encounter]="encounter" *ngIf="gameService.showInitiative"></roll-initiative>
+    <fight [encounter]="encounter" *ngIf="gameService.showFight"></fight>
   </section>
 </div>

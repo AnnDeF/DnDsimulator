@@ -5,5 +5,7 @@ export interface Creature {
     battleHP: number;
     AC: number; //ArmorClass 
     init: number; //initiatiefModifier
-    isMonster:boolean;
+
+    // features for during fight...
+    isMonster: boolean;
 }

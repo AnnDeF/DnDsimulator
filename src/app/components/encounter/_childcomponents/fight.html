@@ -1,31 +1,27 @@
+<h6>Fight</h6>
 
-<h6>Roll initiative</h6>
-<ul class="list-group" *ngFor="let creature of sortedCreatures; let i = index">
-    <li class="list-group-item" [class.active]="i == idx">
+<ul class="list-group">
+    <li class="list-group-item"
+        *ngFor="let creature of sortedCreatures; let i = index"
+        [ngClass]="{ 'active': i == idx, 'isInvisible': creature.isMonster && !creature.isVisible, 'isDying': creature.isDying }">
         <div class="d-flex flex-row justify-content-between">
-                <label class="w-25">
-                    {{creature.naam}}
-                </label>
-                <small class="w25">
-                    <p *ngIf="!creature.isMonster">Playernaam</p>
-                </small>
-        </div>
-        <div class="d-flex flex-row justify-content-start">
-            <label>({{creature.init}})</label>
-            <input type="number" min="0" max="20" [ngModel]="getInitiative(creature)" (ngModelChange)="onInitiativeChanged($event, creature)">
-            <span> {{getTotal(creature) | json}} </span>
+            <label class="w-75">
+                {{creature.naam}} - maxHP: {{creature.maxHP}} - battleHP: {{creature.battleHP}}
+            </label>
+            <small class="w-25" style="text-align: right" *ngIf="!creature.isMonster">
+                Playernaam
+            </small>
         </div>
         <div class="btn-group d-flex justify-content-end">
-            <button *ngIf="creature.isMonster" (click)="toggleVisibility()"> zichtbaar </button>
-            <button (click)=removeFromFight()>verwijder</button>
+            <button *ngIf="creature.isMonster" (click)="toggleVisibility(creature)"> {{ creature.isVisible ? 'Maak ontzichtbaar': 'Maak zichtbaar'}} </button>
+            <button *ngIf="!creature.isMonster" (click)=removeFromFight(creature)>verwijder</button>
         </div>
-    </li> 
+    </li>
 </ul>
 
-<button *ngIf="!showPlayButtons" (click)="gameService.initiativeDecided(initiativeNumbers)">Start</button>
 <div class="btn-group">
-        <button class="btn btn-secondary" [disabled]="this.idx === 0" (click)="previous()">previous</button>
-        <button class="btn btn-secondary" [disabled]="this.idx == this.sortedCreatures.length" (click)="next()">next</button>
+    <button class="btn btn-secondary" (click)="previous()">previous</button>
+    <button class="btn btn-secondary" (click)="next()">next</button>
 </div>
 
 <label>Apply damage: </label>

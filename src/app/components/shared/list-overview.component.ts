@@ -13,22 +13,23 @@ import { Creature } from '../../models/creature';
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let creature of creatures>
+      <tr *ngFor="let creature of creatures">
           <td>
               <a [routerLink]="[creature.id]">{{creature.naam}}</a>
           </td>
           <td>{{creature.maxHP}}</td>
           <td>{{creature.AC}}</td>
-          <button class="btn btn-secondary btn-sm" [routerLink]="[creature.id, 'edit']">
-              Wijzig
-          </button>
-          <button class="btn btn-secondary btn-sm" (click)="addCreature(creature)">
-              Voeg toe
-          </button>
+          <td>
+            <button class="btn btn-secondary btn-sm" [routerLink]="[creature.id, 'edit']">
+                Wijzig
+            </button>
+            <button class="btn btn-secondary btn-sm" (click)="addCreature(creature)">
+                Voeg toe
+            </button>
+          </td>
       </tr>
   </tbody>
 </table>
-
   ` 
 })
 export class ListOverviewComponent {
