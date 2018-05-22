@@ -26,10 +26,10 @@
             <td>{{hero.maxHP}}</td>
             <td>{{hero.AC}}</td>
             <button type="button" class="btn btn-secondary btn-sm" [routerLink]="[hero.id, 'edit']">
-                Wijzig
+                    <span class="fa fa-pencil-square-o"></span>
             </button>
             <button type="button" class="btn btn-secondary btn-sm" (click)="addToEncounter(hero)">
-                Voeg toe
+                    <span class="fa fa-plus-square"></span> Voeg toe
             </button>
         </tr>
     </tbody>

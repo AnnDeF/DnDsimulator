@@ -14,7 +14,8 @@
         <a [routerLink]="['/main', encounter.id]">{{encounter.encounterNaam}}</a>
       </label>
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-secondary" (click)="deleteEncounter()">Verwijder</button>
+        <button type="button" class="btn btn-secondary" (click)="deleteEncounter()">
+            <span class="fa fa-trash-o"></span></button>
       </div>
     </div>
   </li>

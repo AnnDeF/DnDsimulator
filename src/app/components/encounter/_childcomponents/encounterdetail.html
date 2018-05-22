@@ -12,7 +12,7 @@
             <td>{{hero.battleHP}}/{{hero.maxHP}}</td>
             <td>{{hero.AC}}</td>
             <button (click)="removeHeroFromEncounter(hero)">
-                Verwijder
+                    <span class="fa fa-trash-o"></span>
             </button>
         </tr>
         <tr *ngFor="let monster of _encounter.selectedMonsters">
@@ -20,12 +20,15 @@
             <td>{{monster.battleHP}}/{{monster.maxHP}}</td>
             <td>{{monster.AC}}</td>
             <button (click)="removeMonsterFromEncounter(monster)">
-                Verwijder
+                <span class="fa fa-trash-o"></span>
             </button>
         </tr>
     </tbody>
 </table>
 
-<button (click)="clearEncounter()" *ngIf="!gameService.showInitiative">Clear</button>
-<button (click)="saveEncounter()" *ngIf="!gameService.showInitiative">Opslaan</button>
-<button (click)="startGame()" *ngIf="!gameService.showInitiative">start</button>
+<button (click)="clearEncounter()" *ngIf="!gameService.showInitiative">
+    <span class="fa fa-eraser"></span> </button>
+<button (click)="saveEncounter()" *ngIf="!gameService.showInitiative">
+    <span class="fa fa-floppy-o"></span> </button>
+<button (click)="startGame()" *ngIf="!gameService.showInitiative">
+    <span class="fa fa-play"></span> </button>

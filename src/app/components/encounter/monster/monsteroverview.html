@@ -26,10 +26,10 @@
             <td>{{monster.maxHP}}</td>
             <td>{{monster.AC}}</td>
             <button class="btn btn-secondary btn-sm" [routerLink]="[monster.id, 'edit']">
-                Wijzig
+                    <span class="fa fa-pencil-square-o"></span>
             </button>
             <button class="btn btn-secondary btn-sm" (click)="addToEncounter(monster)">
-                Voeg toe
+                    <span class="fa fa-plus-square"></span> Voeg toe
             </button>
         </tr>
     </tbody>
