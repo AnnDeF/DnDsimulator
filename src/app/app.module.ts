@@ -13,7 +13,7 @@ import { CreaturesData } from './services/in-memory-data.service';
 import { LibraryComponent } from './components/encounter/_childcomponents/library.component';
 import { EncounterDetailComponent } from './components/encounter/_childcomponents/encounterdetail.component';
 
-import { EncounteroverviewComponent } from './components/encounter/encounter/encounteroverview.component';
+import { EncounteroverviewComponent } from './components/encounter/encounteroverview/encounteroverview.component';
 
 import { HeroDetailComponent } from './components/encounter/hero/herodetail.component';
 import { HeroesOverviewComponent } from './components/encounter/hero/heroes-overview.component';

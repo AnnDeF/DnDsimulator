@@ -39,7 +39,8 @@ export class HeroDetailComponent implements OnInit {
                     maxHP: 0,
                     battleHP: 0,
                     AC: 0,
-                    init: 0
+                    init: 0,
+                    isMonster:false
                 }
             }
         });
@@ -57,7 +58,8 @@ export class HeroDetailComponent implements OnInit {
             maxHP: this.hero.maxHP,
             battleHP: this.hero.maxHP,
             AC: this.hero.AC,
-            init: this.hero.init
+            init: this.hero.init,
+            isMonster:this.hero.false
         }
         this.heroService.addHero(newHero).subscribe(hero => { this.hero = hero, this.return() });
     }
@@ -70,7 +72,8 @@ export class HeroDetailComponent implements OnInit {
             maxHP: this.hero.maxHP,
             battleHP: this.hero.maxHP,
             AC: this.hero.AC,
-            init: this.hero.init
+            init: this.hero.init,
+            isMonster: this.hero.false
         }
         this.heroService.updateHero(hero).subscribe(hero => { this.hero = hero, this.return() });
     }

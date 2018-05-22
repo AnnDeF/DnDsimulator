@@ -18,15 +18,15 @@ export class EncounterDetailComponent implements OnInit {
   change: EventEmitter<Creature> = new EventEmitter<Creature>();
 
   private _encounter: Encounter = null;
+  
   @Input()
   set encounter(encounter: Encounter) {
     this._encounter = encounter;
     if (this._encounter == null) return;
   }
 
-  private isNew: boolean;
-  private isVisible: boolean = true;
   private initiativeNumbers: number[] = [];
+  private creatures: Creature[];
 
   constructor(
     private encounterService: EncounterService,
@@ -40,10 +40,6 @@ export class EncounterDetailComponent implements OnInit {
     })
   }
 
-  toggleVisibility(creature: any) {
-    this.isVisible = !this.isVisible;
-  }
-
   saveEncounter() {
     this.encounterService.updateEncounter(this._encounter).subscribe();
   }
@@ -53,7 +49,7 @@ export class EncounterDetailComponent implements OnInit {
     this._encounter.selectedMonsters.splice(idx, 1)
   }
 
-  removeHeroFromEncounter(hero: Hero) {
+  removeHeroFromEncounter(hero:Hero) {
     const idx = this._encounter.selectedHeroes.indexOf(hero);
     this._encounter.selectedHeroes.splice(idx, 1)
   }
@@ -66,6 +62,13 @@ export class EncounterDetailComponent implements OnInit {
 
   startGame() {
     this.gameService.startGame();
+  }
+
+  isMonster(creature):boolean{
+    if (creature instanceof Monster){
+      return true;
+    }
+    else return false;
   }
 
   // public getInitiative(creature: Creature) : number {

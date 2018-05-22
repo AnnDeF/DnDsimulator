@@ -1,0 +1,9 @@
+#fightLi{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.active{
+    background-color: yellow;
+}

@@ -8,7 +8,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 15,
         'battleHP': 15,
         'AC': 15,
-        'init': 2
+        'init': 2,
+        'isMonster': false
       },
       {
         'id': 2,
@@ -16,7 +17,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 15,
         'battleHP': 15,
         'AC': 15,
-        'init': 1
+        'init': 1,
+        'isMonster': false
       },
       {
         'id': 3,
@@ -24,7 +26,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 15,
         'battleHP': 15,
         'AC': 15,
-        'init': 2
+        'init': 2,
+        'isMonster': false
       },
       {
         'id': 4,
@@ -32,7 +35,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 15,
         'battleHP': 15,
         'AC': 15,
-        'init': 2
+        'init': 2,
+        'isMonster': false
 
       },
       {
@@ -41,7 +45,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 30,
         'battleHP': 30,
         'AC': 30,
-        'init': 6
+        'init': 6,
+        'isMonster': false
 
       },
       {
@@ -50,7 +55,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 20,
         'battleHP': 20,
         'AC': 20,
-        'init': 3
+        'init': 3,
+        'isMonster': false
       },
       {
         'id': 7,
@@ -58,7 +64,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 20,
         'battleHP': 20,
         'AC': 20,
-        'init': 4
+        'init': 4,
+        'isMonster': false
       },
       {
         'id': 8,
@@ -66,7 +73,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 20,
         'battleHP': 20,
         'AC': 20,
-        'init': 4
+        'init': 4,
+        'isMonster': false
       },
       {
         'id': 9,
@@ -74,7 +82,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 25,
         'battleHP': 25,
         'AC': 25,
-        'init': 5
+        'init': 5,
+        'isMonster': false
       },
       {
         'id': 10,
@@ -82,7 +91,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 15,
         'battleHP': 15,
         'AC': 15,
-        'init': 3
+        'init': 3,
+        'isMonster': false
       },
       {
         'id': 11,
@@ -90,7 +100,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 25,
         'battleHP': 25,
         'AC': 25,
-        'init': 4
+        'init': 4,
+        'isMonster': false
       }
     ];
 
@@ -101,7 +112,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 75,
         'battleHP': 75,
         'AC': 50,
-        'init': -5
+        'init': -5,
+        'isMonster': true
       },
       {
         'id': 13,
@@ -109,7 +121,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 50,
         'battleHP': 50,
         'AC': 50,
-        'init': -2
+        'init': -2,
+        'isMonster': true
       },
       {
         'id': 14,
@@ -117,7 +130,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 150,
         'battleHP': 150,
         'AC': 150,
-        'init': 5
+        'init': 5,
+        'isMonster': true
       },
       {
         'id': 15,
@@ -125,7 +139,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 250,
         'battleHP': 250,
         'AC': 150,
-        'init': 6
+        'init': 6,
+        'isMonster': true
       },
       {
         'id': 16,
@@ -133,7 +148,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 80,
         'battleHP': 80,
         'AC': 75,
-        'init': -5
+        'init': -5,
+        'isMonster': true
       },
       {
         'id': 17,
@@ -141,7 +157,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 120,
         'battleHP': 120,
         'AC': 80,
-        'init': 5
+        'init': 5,
+        'isMonster': true
       },
       {
         'id': 18,
@@ -149,7 +166,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 150,
         'battleHP': 150,
         'AC': 180,
-        'init': 5
+        'init': 5,
+        'isMonster': true
       },
       {
         'id': 19,
@@ -157,7 +175,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 220,
         'battleHP': 220,
         'AC': 220,
-        'init': 4
+        'init': 4,
+        'isMonster': true
       },
       {
         'id': 20,
@@ -165,7 +184,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 250,
         'battleHP': 250,
         'AC': 250,
-        'init': 5
+        'init': 5,
+        'isMonster': true
       },
       {
         'id': 21,
@@ -173,7 +193,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 200,
         'battleHP': 200,
         'AC': 200,
-        'init': 4
+        'init': 4,
+        'isMonster': true
       },
       {
         'id': 22,
@@ -181,7 +202,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 150,
         'battleHP': 150,
         'AC': 150,
-        'init': -5
+        'init': -5,
+        'isMonster': true
       },
       {
         'id': 23,
@@ -189,7 +211,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 65,
         'battleHP': 65,
         'AC': 65,
-        'init': 5
+        'init': 5,
+        'isMonster': true
       },
       {
         'id': 24,
@@ -197,7 +220,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 150,
         'battleHP': 150,
         'AC': 150,
-        'init': 1
+        'init': 1,
+        'isMonster': true
       },
       {
         'id': 25,
@@ -205,7 +229,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 105,
         'battleHP': 105,
         'AC': 85,
-        'init': -5
+        'init': -5,
+        'isMonster': true
       },
       {
         'id': 26,
@@ -213,7 +238,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 100,
         'battleHP': 100,
         'AC': 125,
-        'init': 10
+        'init': 10,
+        'isMonster': true
       }
     ]
 
@@ -227,7 +253,8 @@ export class CreaturesData implements InMemoryDbService {
             'maxHP': 25,
             'battleHP': 25,
             'AC': 25,
-            'init': 5
+            'init': 5,
+            'isMonster': false
           },
           {
             'id': 10,
@@ -235,7 +262,8 @@ export class CreaturesData implements InMemoryDbService {
             'maxHP': 15,
             'battleHP': 15,
             'AC': 15,
-            'init': 3
+            'init': 3,
+            'isMonster': false
           },
           {
             'id': 11,
@@ -243,7 +271,8 @@ export class CreaturesData implements InMemoryDbService {
             'maxHP': 25,
             'battleHP': 25,
             'AC': 25,
-            'init': 4
+            'init': 4,
+            'isMonster': false
           }],
         'selectedMonsters': [
           {
@@ -252,7 +281,8 @@ export class CreaturesData implements InMemoryDbService {
             'maxHP': 150,
             'battleHP': 150,
             'AC': 150,
-            'init': 1
+            'init': 1,
+            'isMonster': true
           },
           {
             'id': 25,
@@ -260,7 +290,8 @@ export class CreaturesData implements InMemoryDbService {
             'maxHP': 105,
             'battleHP': 105,
             'AC': 85,
-            'init': -5
+            'init': -5,
+            'isMonster': true
           },
           {
             'id': 26,
@@ -268,7 +299,8 @@ export class CreaturesData implements InMemoryDbService {
             'maxHP': 100,
             'battleHP': 100,
             'AC': 125,
-            'init': 10
+            'init': 10,
+            'isMonster': true
           }]
       },
       {
@@ -280,7 +312,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 15,
         'battleHP': 15,
         'AC': 15,
-        'init': 2
+        'init': 2,
+        'isMonster': false
       },
       {
         'id': 2,
@@ -288,7 +321,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 15,
         'battleHP': 15,
         'AC': 15,
-        'init': 1
+        'init': 1,
+        'isMonster': false
       },
       {
         'id': 3,
@@ -296,7 +330,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 15,
         'battleHP': 15,
         'AC': 15,
-        'init': 2
+        'init': 2,
+        'isMonster': false
       },
       {
         'id': 4,
@@ -304,7 +339,8 @@ export class CreaturesData implements InMemoryDbService {
         'maxHP': 15,
         'battleHP': 15,
         'AC': 15,
-        'init': 2
+        'init': 2,
+        'isMonster': false
 
       }],
       'selectedMonsters': [
@@ -314,7 +350,8 @@ export class CreaturesData implements InMemoryDbService {
           'maxHP': 220,
           'battleHP': 220,
           'AC': 220,
-          'init': 4
+          'init': 4,
+          'isMonster': true
         },
         {
           'id': 20,
@@ -322,7 +359,8 @@ export class CreaturesData implements InMemoryDbService {
           'maxHP': 250,
           'battleHP': 250,
           'AC': 250,
-          'init': 5
+          'init': 5,
+          'isMonster': true
         },
         {
           'id': 21,
@@ -330,7 +368,8 @@ export class CreaturesData implements InMemoryDbService {
           'maxHP': 200,
           'battleHP': 200,
           'AC': 200,
-          'init': 4
+          'init': 4,
+          'isMonster': true
         }]
       }
     ]

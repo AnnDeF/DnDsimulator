@@ -7,4 +7,5 @@ export class Hero implements Creature {
     battleHP: number;
     AC: number; //ArmorClass 
     init: number; //initiatiefModifier
+    isMonster:boolean = false;
 }

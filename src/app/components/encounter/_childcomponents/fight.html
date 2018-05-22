@@ -1,0 +1,30 @@
+
+<h6>Roll initiative</h6>
+<ul class="list-group" *ngFor="let creature of sortedCreatures; let i = index">
+    <li class="list-group-item" [class.active]="i == idx">
+        <div class="d-flex flex-row justify-content-between">
+                <label class="w-25">
+                    {{creature.naam}}
+                </label>
+                <small class="w25">
+                    <p *ngIf="!creature.isMonster">Playernaam</p>
+                </small>
+        </div>
+        <div class="d-flex flex-row justify-content-start">
+            <label>({{creature.init}})</label>
+            <input type="number" min="0" max="20" [ngModel]="getInitiative(creature)" (ngModelChange)="onInitiativeChanged($event, creature)">
+            <span> {{getTotal(creature) | json}} </span>
+        </div>
+        <div class="btn-group d-flex justify-content-end">
+            <button *ngIf="creature.isMonster" (click)="toggleVisibility()"> zichtbaar </button>
+            <button (click)=removeFromFight()>verwijder</button>
+        </div>
+    </li> 
+</ul>
+
+<button *ngIf="!showPlayButtons" (click)="gameService.initiativeDecided(initiativeNumbers)">Start</button>
+<div class="btn-group">
+        <button class="btn btn-secondary" [disabled]="this.idx === 0" (click)="previous()">previous</button>
+        <button class="btn btn-secondary" [disabled]="this.idx == this.sortedCreatures.length" (click)="next()">next</button>
+</div>
+

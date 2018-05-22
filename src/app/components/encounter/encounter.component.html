@@ -8,7 +8,8 @@
   </section>
 
   <section class="encounterDetail">
-    <encounterdetail [encounter]="encounter"></encounterdetail>
+    <encounterdetail 
+      [encounter]="encounter"></encounterdetail>
     <fight [encounter]="encounter" *ngIf="gameService.showInitiative"></fight>
   </section>
 </div>
