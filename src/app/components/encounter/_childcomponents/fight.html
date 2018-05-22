@@ -28,3 +28,8 @@
         <button class="btn btn-secondary" [disabled]="this.idx == this.sortedCreatures.length" (click)="next()">next</button>
 </div>
 
+<label>Apply damage: </label>
+<input type="number" min="0" max="20" placeholder="0" name="damage" (keyUp)="onHealthNegativeChanged($event, creature)">
+
+<label>Healing power: </label>
+<input type="number" min="0" max="20" placeholder="0" name="heal" (keyUp)="onHealthPositiveChanged($event, creature)">

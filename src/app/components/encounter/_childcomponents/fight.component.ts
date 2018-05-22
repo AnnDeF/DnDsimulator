@@ -93,10 +93,6 @@ export class FightComponent implements OnInit {
 
 
   // Spel
-  isMonster(): boolean{
-    return true;
-  }
-
   toggleVisibility():boolean{
     return true;
   }
@@ -120,8 +116,53 @@ export class FightComponent implements OnInit {
     (this.idx)++;
   }
 
-  doDamage(){}
+  public onHealthPositiveChanged(newValue: number, creature: Creature) {
+    const health = creature.battleHP;
+    const healPower = newValue;
+    const newBattleHP = healPower + health;
 
-  heal(){}
+    if (newBattleHP > creature.maxHP)
+      {return creature.maxHP}
+    else return newBattleHP;
+
+  }
+
+  public onHealthNegativeChanged(newValue: number, creature: Creature) {
+    const idx = this.creatures.indexOf(creature);
+    this.initiativeNumbers[idx] = newValue;
+  }
 
 }
+
+
+
+// public getTotal(creature: Creature) : number {
+//   const init = creature.init;
+//   const rolled = this.getInitiative(creature);
+
+//   if ((init + rolled) > 20)  {
+//     return 20;
+//   }
+
+//   return (init + rolled);
+// }
+
+
+  //   Heal(heal: number) {
+  //     var newHP = this.hero.battleHP + heal;
+
+  //     if (newHP > this.hero.maxHP) {
+  //         return this.hero.maxHP;
+  //     }
+  //     else return newHP;
+  // };
+
+  // doDamage(damage: number) {
+  //     var newHP = this.hero.battleHP - damage;
+  //     if (newHP <= 0) {
+  //         return 0;
+  //     }
+  //     else {
+  //         return newHP;
+  //     }
+  // };

@@ -10,6 +10,8 @@ import { GameService } from '../../../services/game.service';
 export class EncounteroverviewComponent implements OnInit {
   private encounters: Encounter[];
 
+  private filteredEncounters: Encounter[];
+
   constructor(
     private encounterService: EncounterService,
     private gameService: GameService
@@ -20,7 +22,7 @@ export class EncounteroverviewComponent implements OnInit {
   }
 
   refresh() {
-    this.encounterService.getEncounters().subscribe(encounters => this.encounters = encounters);
+    this.encounterService.getEncounters().subscribe(encounters => {this.encounters = encounters, this.filteredEncounters = encounters});
   }
 
   openEncounter(id: number) {
@@ -31,5 +33,13 @@ export class EncounteroverviewComponent implements OnInit {
     this.encounterService.deleteEncounter(id).subscribe();
   }
 
+  performFilter(filterBy: string): void {
+    if (filterBy) {
+      filterBy = filterBy.toLocaleLowerCase();
+      this.filteredEncounters = this.encounters.filter((encounter: Encounter) => encounter.encounterNaam.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    } else {
+      this.filteredEncounters = this.encounters;
+    }
+  }
 
 }

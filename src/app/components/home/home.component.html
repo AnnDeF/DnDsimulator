@@ -9,5 +9,6 @@
 <button class="idAdv" (click)="showNumberField()">
     <img src="../../../assets/AdventureId.png">
 </button>
+
 <input *ngIf="showNumber" id="encounterId" type="number" class="form-control w-25" placeholder="0" name="encounterId" (keyup)="onKeyForExisting($event)"
 />

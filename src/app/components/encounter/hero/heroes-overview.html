@@ -2,12 +2,9 @@
     <button type="button" class="btn btn-secondary" [routerLink]="['create']">
         Add hero
     </button>
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <div class="btn btn-secondary input-group-text" id="btnGroupAddon">Filter</div>
-        </div>
-        <input type="text" class="form-control" placeholder="Naam" [(ngModel)]="listFilter">
-    </div>
+  
+    <filter (onChange)="performFilter($event)"></filter>
+
 </div>
 <table class="table table-striped table-dark table-hover" *ngIf="filteredHeroes">
     <thead class="thead-dark">

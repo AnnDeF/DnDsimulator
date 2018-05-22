@@ -6,7 +6,14 @@ import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'monster',
-  templateUrl: './monsterdetail.html'
+  template: `<div *ngIf="monster" class="container">
+  <h3>{{monster.naam}}</h3>
+
+  <detail [creature]="monster"></detail>
+  
+  <btn-save *ngIf="isNew" (onClick)="addMonster()" title="Monster opslaan"></btn-save>
+  <btn-save *ngIf="!isNew" (onClick)="updateMonster()"></btn-save>
+</div>`
 })
 export class MonsterDetailComponent implements OnInit {
   private monster: any;

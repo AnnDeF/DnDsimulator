@@ -11,7 +11,6 @@ export class HeroesOverviewComponent implements OnInit {
   private heroes: Hero[];
   private sorted: boolean = true;
 
-  private _listFilter: string;
   private filteredHeroes: Hero[] = [];
 
   constructor(private heroService: HeroService, private gameService:GameService) { }
@@ -28,18 +27,13 @@ export class HeroesOverviewComponent implements OnInit {
     this.gameService.addHero(hero);
   }
 
-  get listFilter(): string {
-    return this._listFilter;
-  }
-
-  set listFilter(value: string) {
-    this._listFilter = value;
-    this.filteredHeroes = this.listFilter ? this.performFilter(this.listFilter) : this.heroes;
-  }
-
-  performFilter(filterBy: string): Hero[] {
-    filterBy = filterBy.toLocaleLowerCase();
-    return this.heroes.filter((hero: Hero) => hero.naam.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  performFilter(filterBy: string): void {
+    if (filterBy) {
+      filterBy = filterBy.toLocaleLowerCase();
+      this.filteredHeroes = this.heroes.filter((hero: Hero) => hero.naam.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    } else {
+      this.filteredHeroes = this.heroes;
+    }
   }
 
   sortByHP() {

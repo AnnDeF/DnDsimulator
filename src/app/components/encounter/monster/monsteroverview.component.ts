@@ -10,8 +10,7 @@ import { GameService } from '../../../services/game.service';
 export class MonsteroverviewComponent implements OnInit {
   private monsters: Monster[];
   private sorted: boolean = false;
-  
-  private _listFilter: string;
+ 
   private filteredMonsters: Monster[];
 
   constructor(private monsterService: MonsterService, private gameService:GameService) { }
@@ -28,20 +27,14 @@ export class MonsteroverviewComponent implements OnInit {
     this.gameService.addMonster(monster)
   }
 
-  get listFilter(): string {
-    return this._listFilter;
+  performFilter(filterBy: string): void {
+    if (filterBy) {
+      filterBy = filterBy.toLocaleLowerCase();
+      this.filteredMonsters = this.monsters.filter((monster: Monster) => monster.naam.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    } else {
+      this.filteredMonsters = this.monsters;
+    }
   }
-
-  set listFilter(value: string) {
-    this._listFilter = value;
-    this.filteredMonsters = this.listFilter ? this.performFilter(this.listFilter) : this.monsters;
-  }
-
-  performFilter(filterBy: string): Monster[] {
-    filterBy = filterBy.toLocaleLowerCase();
-    return this.monsters.filter((monster: Monster) => monster.naam.toLocaleLowerCase().indexOf(filterBy) !== -1);
-  }
-
 
   sortByHP() {
     this.sorted = !this.sorted;

@@ -1,20 +1,21 @@
 <div class="btn-toolbar justify-content-start" role="toolbar">
-        <button type="button" class="btn btn-secondary" [routerLink]="['create']">
-          Add monster
-        </button>
-        <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="btn btn-secondary input-group-text" id="btnGroupAddon">Filter</div>
-            </div>
-            <input type="text" class="form-control" placeholder="Naam" [(ngModel)]="listFilter">
-          </div>
-      </div>
+    <button type="button" class="btn btn-secondary" [routerLink]="['create']">
+        Add monster
+    </button>
+
+    <filter (onChange)="performFilter($event)"></filter>
+
+</div>
 <table class="table table-striped table-dark table-hover" *ngIf="filteredMonsters">
     <thead class="thead-dark">
         <tr>
             <th scope="col">Naam</th>
-            <th scope="col"><a (click)="sortByHP()">Hit Points</a></th>
-            <th scope="col"><a (click)="sortByAC()">Armor Class</a></th>
+            <th scope="col">
+                <a (click)="sortByHP()">Hit Points</a>
+            </th>
+            <th scope="col">
+                <a (click)="sortByAC()">Armor Class</a>
+            </th>
         </tr>
     </thead>
     <tbody>

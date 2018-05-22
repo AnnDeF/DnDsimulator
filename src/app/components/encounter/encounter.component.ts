@@ -52,23 +52,5 @@ export class EncounterComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  //   Heal(heal: number) {
-  //     var newHP = this.hero.battleHP + heal;
-
-  //     if (newHP > this.hero.maxHP) {
-  //         return this.hero.maxHP;
-  //     }
-  //     else return newHP;
-  // };
-
-  // doDamage(damage: number) {
-  //     var newHP = this.hero.battleHP - damage;
-  //     if (newHP <= 0) {
-  //         return 0;
-  //     }
-  //     else {
-  //         return newHP;
-  //     }
-  // };
 
 }

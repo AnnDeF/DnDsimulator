@@ -8,13 +8,21 @@ import { Observable } from 'rxjs';
 
 @Component({
     selector: 'hero',
-    templateUrl: './herodetail.html'
+    template: `<div *ngIf="hero" class="container">
+    <h3>{{hero.naam}}</h3>
+
+    <detail [creature]="hero"></detail>
+
+    <btn-save *ngIf="isNew" (onClick)="addHero()"  title="Hero opslaan"></btn-save>
+    <btn-save *ngIf="!isNew" (onClick)="updateHero()"></btn-save>
+</div>` 
 })
 export class HeroDetailComponent implements OnInit {
     private hero: any;
     private heroes: Hero[];
     private isNew: boolean;
     private sub: any;
+    public saveText = 'Hero opslaan';
 
     constructor(private heroService: HeroService, private route: ActivatedRoute, private router: Router) { }
 

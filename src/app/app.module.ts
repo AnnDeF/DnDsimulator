@@ -30,6 +30,10 @@ import { EncounterService } from './services/encounter.service';
 import { GameService } from './services/game.service';
 import { FightComponent } from './components/encounter/_childcomponents/fight.component';
 
+import { BtnSaveComponent } from './components/shared/btn-save.component';
+import { DetailComponent } from './components/shared/detail.component';
+import { ListOverviewComponent } from './components/shared/list-overview.component';
+import { FilterComponent } from './components/shared/filter.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -61,7 +65,11 @@ const appRoutes: Routes = [
     LibraryComponent,
     HomeComponent,
     EncounterComponent,
-    FightComponent
+    FightComponent,
+    BtnSaveComponent,
+    DetailComponent,
+    ListOverviewComponent,
+    FilterComponent,
   ],
   imports: [
     CommonModule,
