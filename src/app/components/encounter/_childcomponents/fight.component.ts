@@ -16,6 +16,7 @@ import { Monster } from '../../../models/monster';
 export class FightComponent implements OnInit {
   private initiativeNumbers: number[];
   private creatures: Creature[];
+  private playerName: string;
   private sortedCreatures: Creature[];
   private heroes: Creature[];
   private idx: number = 0;
@@ -29,6 +30,7 @@ export class FightComponent implements OnInit {
   set encounter(encounter: Encounter) {
     this._encounter = encounter;
     if (this._encounter == null) return;
+    this.playerName = this._encounter.playerName[0];
     this.creatures = this._encounter.selectedHeroes.concat(this._encounter.selectedMonsters);
   }
 

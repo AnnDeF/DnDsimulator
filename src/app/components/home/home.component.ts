@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   private encounter:Encounter;
   private encounterNaam: string;
   private encounterId: number;
+  private playerNaam: string;
 
   constructor(
     private router: Router,
@@ -24,22 +25,14 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  public onKeyForNew(event: KeyboardEvent) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-      this.encounterNaam = (<HTMLInputElement>event.target).value;
-      this.gameService.startNewEncounter(this.encounterNaam);
-    }
+  startGameWithName(){
+    this.gameService.startNewEncounter(this.encounterNaam);
   }
 
-  public onKeyForExisting(event: KeyboardEvent) {
-    event.preventDefault();
-    if (event.keyCode === 13) 
-    {
-      const value = (<HTMLInputElement>event.target).valueAsNumber;
-      this.gameService.openEncounter(value);
-    }
+  startGameWithId(){
+    this.gameService.openEncounter(this.encounterId);
   }
+
 
   showTextField() {
     this.showNumber = false;

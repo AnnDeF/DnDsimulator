@@ -32,6 +32,7 @@ export class GameService {
 
   startNewEncounter(encounterNaam: string): void {
     const encounter = new Encounter();
+    encounter.playerName = []
     encounter.encounterNaam = encounterNaam;
     encounter.selectedHeroes = [];
     encounter.selectedMonsters = [];
