@@ -6,15 +6,15 @@
         [ngClass]="{ 'active': i == idx, 'isInvisible': creature.isMonster && !creature.isVisible, 'isDying': creature.isDying }">
         <div class="d-flex flex-row justify-content-between">
             <label class="w-75">
-                {{creature.naam}} - maxHP: {{creature.maxHP}} - battleHP: {{creature.battleHP}}
+                {{creature.naam}} - {{creature.maxHP}}/{{creature.battleHP}}
             </label>
             <small class="w-25" style="text-align: right" *ngIf="!creature.isMonster">
-                {{playerName}}
+                {{_encounter.playerName}}
             </small>
         </div>
         <div class="btn-group d-flex justify-content-end">
-            <button *ngIf="creature.isMonster" (click)="toggleVisibility(creature)"> {{ creature.isVisible ? 'Maak ontzichtbaar': 'Maak zichtbaar'}} </button>
-            <button *ngIf="!creature.isMonster" (click)=removeFromFight(creature)>verwijder</button>
+            <button *ngIf="creature.isMonster" (click)="toggleVisibility(creature)"> {{ creature.isVisible ? '<span class="fa fa-eye-slash"></span>' : '<span class="fa fa-eye"></span>'}} </button>
+            <button *ngIf="!creature.isMonster" (click)=removeFromFight(creature)><span class="fa fa-trash"></span></button>
         </div>
     </li>
 </ul>

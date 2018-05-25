@@ -1,10 +1,5 @@
 <div class="btn-toolbar justify-content-start" role="toolbar">
-  <div class="input-group">
-    <div class="input-group-prepend">
-      <div class="btn btn-secondary input-group-text" id="btnGroupAddon">Filter</div>
-    </div>
-    <input type="text" class="form-control" placeholder="Naam" [(ngModel)]="listFilter">
-  </div>
+  <filter (onChange)="performFilter($event)"></filter>
 </div>
 
 <ul class="list-group">

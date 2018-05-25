@@ -71,32 +71,4 @@ export class EncounterDetailComponent implements OnInit {
     else return false;
   }
 
-  // public getInitiative(creature: Creature) : number {
-  //   const idx = this.creatures.indexOf(creature);
-  //   return this.initiativeNumbers[idx];
-  // }
-
-  // public getTotal(creature: Creature) : number {
-  //   const init = creature.init;
-  //   const rolled = this.getInitiative(creature);
-
-  //   if ((init + rolled) > 20)  {
-  //     return 20;
-  //   }
-
-  //   return (init + rolled);
-  // }
-
-  // sortByInitiative(a: Creature, b: Creature) : number {
-  //   if (this.initiativeNumbers.length == 0)
-  //     return b.init - a.init;
-    
-  //   const totalA = this.getTotal(a);
-  //   const totalB = this.getTotal(b);
-    
-  //   const result = totalB - totalA;
-
-  //   return result;
-  // }
-
 }

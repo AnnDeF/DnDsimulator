@@ -26,11 +26,11 @@ export class HomeComponent implements OnInit {
   }
 
   startGameWithName(){
-    this.gameService.startNewEncounter(this.encounterNaam);
+    this.gameService.startNewEncounterWithName(this.encounterNaam, this.playerNaam);
   }
 
   startGameWithId(){
-    this.gameService.openEncounter(this.encounterId);
+    this.gameService.startNewEncounterWithId(this.encounterId, this.playerNaam);
   }
 
 

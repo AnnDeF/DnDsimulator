@@ -4,14 +4,15 @@
 
 <div class="wrapper">
   <section class="library">
-    <library></library>
+    <library *ngIf="!gameService.showInitiative && !gameService.showFight"></library>
   </section>
 
   <section class="encounterDetail">
-    <h3>{{encounter.encounterNaam}}</h3>
+    <h1 class="encounterTitel">{{encounter.encounterNaam}}</h1>
 
     <encounterdetail [encounter]="encounter" *ngIf="!gameService.showInitiative && !gameService.showFight"></encounterdetail>
     <roll-initiative [encounter]="encounter" *ngIf="gameService.showInitiative"></roll-initiative>
     <fight [encounter]="encounter" *ngIf="gameService.showFight"></fight>
   </section>
 </div>
+

@@ -30,13 +30,13 @@ export class GameService {
     private router: Router
   ) { }
 
-  startNewEncounter(encounterNaam: string): void {
+  startNewEncounterWithName(encounterNaam: string, playerName: string): void {
     const encounter = new Encounter();
-    encounter.playerName = []
+    encounter.playerName = playerName;
     encounter.encounterNaam = encounterNaam;
     encounter.selectedHeroes = [];
     encounter.selectedMonsters = [];
-
+     
     this.encounterService.addEncounter(encounter)
       .pipe(map((encounter) => {
         this.router.navigate(['/main', encounter.id]);
@@ -44,6 +44,16 @@ export class GameService {
         this._encounter.next(encounter);
       })
       ).subscribe();
+  }
+
+  startNewEncounterWithId(encounterId: number, playerName: string){
+      this.encounterService.getEncounter(encounterId)
+        .subscribe(encounter => {
+          this.router.navigate(['/main', encounter.id]);
+          this.currentEncounter = encounter;
+          this._encounter.next(encounter);
+        });  
+
   }
 
   openEncounter(encounterId: number): void {

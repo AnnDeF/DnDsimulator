@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../../../models/hero';
 import { HeroService } from '../../../services/hero.service';
 import { GameService } from '../../../services/game.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'heroes-overview',
@@ -13,7 +14,7 @@ export class HeroesOverviewComponent implements OnInit {
 
   private filteredHeroes: Hero[] = [];
 
-  constructor(private heroService: HeroService, private gameService:GameService) { }
+  constructor(private heroService: HeroService, private gameService:GameService, private router:Router) { }
 
   ngOnInit() {
     this.refresh();
@@ -25,6 +26,11 @@ export class HeroesOverviewComponent implements OnInit {
 
   addToEncounter(hero: Hero){
     this.gameService.addHero(hero);
+  }
+
+  deleteHero(id: number){
+    this.heroService.deleteHero(id).subscribe();
+    this.router.navigate(['']);
   }
 
   performFilter(filterBy: string): void {

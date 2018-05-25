@@ -1,4 +1,4 @@
-<img class="homeAchtergrond" src="../../../assets/home-background.jpg">
+<!-- <img class="homeAchtergrond" src="../../../assets/home-background.jpg"> -->
 
 <button class="newAdv" (click)="showTextField()">
     <img src="../../../assets/new-adventure.png">
@@ -8,19 +8,16 @@
     <img src="../../../assets/AdventureId.png">
 </button>
 
-<form *ngIf="showText" class="nameForm">
-<input id="encounterNaam" type="text" placeholder="Naam Encounter" name="naam" [value]="encounterNaam">
-
-<input id="playerNaam" type="text" placeholder="Naam speler" name="playerNaam" [value]="playerNaam"
-    />
-</form>>
-<button type="submit">Enter</button>
+<form *ngIf="showText" class="form-group nameForm">
+<input id="encounterNaam" class="form-control" type="text" placeholder="Naam Encounter" name="naam" [(ngModel)]="encounterNaam">
+<input id="playerNaam" class="form-control" type="text" placeholder="Naam speler" name="playerNaam" [(ngModel)]="playerNaam">
+    <button type="submit" (click)="startGameWithName()">Enter</button>
+</form>
 
 
-<form *ngIf="showNumber" class="idForm">
-<input id="encounterId" type="number" placeholder="0" name="encounterId" [value]="encounterId"
-/>
-<input id="playerNaam" type="text" placeholder="Naam speler" name="playerNaam" [value]="playerNaam"
-    />
-</form>>
-<button type="submit">Enter</button>
+
+<form *ngIf="showNumber" class="form-group idForm">
+<input id="encounterId" class="form-control" type="number" placeholder="0" name="encounterId" [(ngModel)]="encounterId">
+<input id="playerNaam" class="form-control" type="text" placeholder="Naam speler" name="playerNaam" [(ngModel)]="playerNaam">
+    <button type="submit" (click)="startGameWithId()">Enter</button>
+</form>

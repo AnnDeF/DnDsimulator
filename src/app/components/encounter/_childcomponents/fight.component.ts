@@ -3,8 +3,10 @@ import { EncounterService } from '../../../services/encounter.service';
 import { GameService } from '../../../services/game.service';
 import { Creature } from '../../../models/creature';
 import { Encounter } from '../../../models/encounter';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Monster } from '../../../models/monster';
+import { MonsterService } from '../../../services/monster.service';
+import { HeroService } from '../../../services/hero.service';
 
 
 @Component({
@@ -30,12 +32,15 @@ export class FightComponent implements OnInit {
   set encounter(encounter: Encounter) {
     this._encounter = encounter;
     if (this._encounter == null) return;
-    this.playerName = this._encounter.playerName[0];
+    this.playerName = this._encounter.playerName;
     this.creatures = this._encounter.selectedHeroes.concat(this._encounter.selectedMonsters);
   }
 
   constructor(
+    private router: Router,
     private encounterService: EncounterService,
+    private monsterService: MonsterService,
+    private heroesService: HeroService,
     private gameService: GameService, private route: ActivatedRoute
   ) { }
 
@@ -96,13 +101,13 @@ export class FightComponent implements OnInit {
   // Spel
   toggleVisibility(monster: Monster) {
     monster.isVisible = !monster.isVisible;
-    // TODO:
-    //this.monsterService.update
+
+    this.monsterService.updateMonster(monster).subscribe();
   }
 
   removeFromFight(creature: Creature) {
     if (!creature.isMonster) {
-      if (confirm("Are you sure you want to delete this hero?")) {
+      if (confirm("Ben je zeker dat je deze held wilt verwijderen uit het gevecht?")) {
         const idx = this.sortedCreatures.indexOf(creature);
         this.sortedCreatures.splice(idx, 1)
       }
@@ -141,14 +146,43 @@ export class FightComponent implements OnInit {
 
   private getUseFullCreatures(): Creature[] {
     let usefullCreatures = this.sortedCreatures.filter(creature => {
-      if (creature.isMonster && creature['isVisible'] == false)
+      if (creature.isMonster && creature['isVisible'] == false) { return false; }
+      if (creature.battleHP == 0) {
         return false;
-        
+      }
+
       return true;
     });
 
+    let heroesAlive = usefullCreatures.filter(creature => !creature.isMonster);
+    let monstersAliveAndVisible = usefullCreatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == true);
+    let monstersAliveAndInVisible = usefullCreatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == false);
+
+    if (heroesAlive.length == 0) {
+      confirm("Game over! Alle helden zijn verslagen. Wil je een nieuw spel beginnen?")
+      {
+        this.router.navigate[''];
+      }
+      if (monstersAliveAndInVisible.length == 0 && monstersAliveAndVisible.length == 0) {
+        confirm("Gewonnen! Alle monsters zijn verslagen. Wil je een nieuw spel starten?")
+        {
+          this.router.navigate[''];
+        }
+      }
+
+      if (heroesAlive.length > 0 && monstersAliveAndInVisible.length > 0 && monstersAliveAndVisible.length == 0) {
+        confirm("Alle zichtbare monsters zijn verslagen. Wil je het spel beëindigen? Zo niet, annuleer en stel de monsters opnieuw in op zichtbaar.")
+        {
+          this.router.navigate[''];
+        }
+      }
+
+    }
+
     return usefullCreatures;
   }
+
+
 
   public onHealthPositiveChanged(newValue: number, creature: Creature) {
     const health = creature.battleHP;
@@ -164,6 +198,11 @@ export class FightComponent implements OnInit {
     const idx = this.creatures.indexOf(creature);
     this.initiativeNumbers[idx] = newValue;
   }
+
+  //foutmelding geven als alle monsters op onzichtbaar staan - verder spelen?
+  // alert als alle helden dood zijn => nieuw spel beginnen?
+  // alle values teru gnaar originele waarden als spel herstart
+
 
 }
 
