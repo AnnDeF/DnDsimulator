@@ -8,7 +8,7 @@
   </section>
 
   <section class="encounterDetail">
-    <h1 class="encounterTitel">{{encounter.encounterNaam}}</h1>
+    <h1 class="encounterTitel">{{encounter?.encounterNaam}}</h1>
 
     <encounterdetail [encounter]="encounter" *ngIf="!gameService.showInitiative && !gameService.showFight"></encounterdetail>
     <roll-initiative [encounter]="encounter" *ngIf="gameService.showInitiative"></roll-initiative>

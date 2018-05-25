@@ -22,7 +22,7 @@ export class EncounterService {
 
     public deleteEncounter(id: number): Observable<Encounter> {
         const url = `${this.encountersUrl}/${id}`;
-        return this.http.post<Encounter>(url, headerInfo);
+        return this.http.delete<Encounter>(url, headerInfo);
     }
 
     public updateEncounter(Encounter: Encounter): Observable<Encounter> {

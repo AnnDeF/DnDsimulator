@@ -36,6 +36,10 @@ export class MonsteroverviewComponent implements OnInit {
     }
   }
 
+  deleteMonster(id: number){
+    this.monsterService.deleteMonster(id).subscribe(() => { this.refresh(); });
+  }
+
   sortByHP() {
     this.sorted = !this.sorted;
     if (this.sorted) {

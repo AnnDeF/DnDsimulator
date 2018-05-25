@@ -1,6 +1,6 @@
 
 .active{
-    background-color: yellow;
+    background-color: #d91f26;
     color: #000;
     font-weight: bold;
 }
@@ -12,3 +12,8 @@
 .isDying {
     border: 2px solid red;
 }
+
+.labelFight{
+    color:white;
+}
+

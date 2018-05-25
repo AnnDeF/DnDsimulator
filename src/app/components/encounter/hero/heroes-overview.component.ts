@@ -29,8 +29,7 @@ export class HeroesOverviewComponent implements OnInit {
   }
 
   deleteHero(id: number){
-    this.heroService.deleteHero(id).subscribe();
-    this.router.navigate(['']);
+    this.heroService.deleteHero(id).subscribe(() => { this.refresh(); });
   }
 
   performFilter(filterBy: string): void {

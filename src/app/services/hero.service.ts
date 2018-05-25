@@ -23,7 +23,7 @@ export class HeroService {
 
     public deleteHero(id: number): Observable<Hero> {
         const url = `${this.heroesUrl}/${id}`;
-        return this.http.post<Hero>(url, headerInfo);
+        return this.http.delete<Hero>(url, headerInfo);
     }
 
     public updateHero(hero: Hero): Observable<Hero> {

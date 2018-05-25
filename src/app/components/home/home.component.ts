@@ -33,6 +33,9 @@ export class HomeComponent implements OnInit {
     this.gameService.startNewEncounterWithId(this.encounterId, this.playerNaam);
   }
 
+  cancel(){
+    this.router.navigate[('')];
+  }
 
   showTextField() {
     this.showNumber = false;

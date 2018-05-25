@@ -7,7 +7,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let hero of _encounter.selectedHeroes">
+        <tr *ngFor="let hero of _encounter?.selectedHeroes">
             <td>{{hero.naam}}</td>
             <td>{{hero.battleHP}}/{{hero.maxHP}}</td>
             <td>{{hero.AC}}</td>
@@ -15,7 +15,7 @@
                     <span class="fa fa-trash-o"></span>
             </button>
         </tr>
-        <tr *ngFor="let monster of _encounter.selectedMonsters">
+        <tr *ngFor="let monster of _encounter?.selectedMonsters">
             <td>{{monster.naam}}</td>
             <td>{{monster.battleHP}}/{{monster.maxHP}}</td>
             <td>{{monster.AC}}</td>

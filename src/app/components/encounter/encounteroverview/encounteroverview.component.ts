@@ -22,7 +22,7 @@ export class EncounteroverviewComponent implements OnInit {
   }
 
   refresh() {
-    this.encounterService.getEncounters().subscribe(encounters => {this.encounters = encounters, this.filteredEncounters = encounters});
+    this.encounterService.getEncounters().subscribe(encounters => { this.encounters = encounters, this.filteredEncounters = encounters });
   }
 
   openEncounter(id: number) {
@@ -30,7 +30,9 @@ export class EncounteroverviewComponent implements OnInit {
   }
 
   deleteEncounter(id: number) {
-    this.encounterService.deleteEncounter(id).subscribe();
+    this.encounterService.deleteEncounter(id).subscribe(() => {
+      this.refresh();
+    });
   }
 
   performFilter(filterBy: string): void {

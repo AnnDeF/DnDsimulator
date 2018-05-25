@@ -101,7 +101,6 @@ export class FightComponent implements OnInit {
   // Spel
   toggleVisibility(monster: Monster) {
     monster.isVisible = !monster.isVisible;
-
     this.monsterService.updateMonster(monster).subscribe();
   }
 
@@ -114,6 +113,7 @@ export class FightComponent implements OnInit {
     }
   }
 
+  //toolbar
   previous() {
     const usefullCreatures = this.getUseFullCreatures();
     const currentCreature = this.sortedCreatures[this.idx];
@@ -146,67 +146,62 @@ export class FightComponent implements OnInit {
 
   private getUseFullCreatures(): Creature[] {
     let usefullCreatures = this.sortedCreatures.filter(creature => {
-      if (creature.isMonster && creature['isVisible'] == false) { return false; }
-      if (creature.battleHP == 0) {
+      if (creature.isMonster && creature['isVisible'] == false)
         return false;
-      }
+      if (creature.battleHP == 0)
+        return false;
 
       return true;
     });
 
-    let heroesAlive = usefullCreatures.filter(creature => !creature.isMonster);
-    let monstersAliveAndVisible = usefullCreatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == true);
-    let monstersAliveAndInVisible = usefullCreatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == false);
+    let heroesAlive = this.sortedCreatures.filter(creature => !creature.isMonster);
+    let monstersAliveAndVisible = this.sortedCreatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == true);
+    let monstersAliveAndInVisible = this.sortedCreatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == false);
 
-    if (heroesAlive.length == 0) {
+    if (heroesAlive.length == 0){
       confirm("Game over! Alle helden zijn verslagen. Wil je een nieuw spel beginnen?")
       {
-        this.router.navigate[''];
+        this.router.navigate(['']);
       }
-      if (monstersAliveAndInVisible.length == 0 && monstersAliveAndVisible.length == 0) {
-        confirm("Gewonnen! Alle monsters zijn verslagen. Wil je een nieuw spel starten?")
-        {
-          this.router.navigate[''];
-        }
-      }
+    }
 
-      if (heroesAlive.length > 0 && monstersAliveAndInVisible.length > 0 && monstersAliveAndVisible.length == 0) {
-        confirm("Alle zichtbare monsters zijn verslagen. Wil je het spel beëindigen? Zo niet, annuleer en stel de monsters opnieuw in op zichtbaar.")
-        {
-          this.router.navigate[''];
-        }
+    if (monstersAliveAndInVisible.length == 0 && monstersAliveAndVisible.length == 0) {
+      confirm("Gewonnen! Alle monsters zijn verslagen. Wil je een nieuw spel starten?")
+      {
+        this.router.navigate(['']);
       }
+    }
 
+    if (heroesAlive.length > 0 && monstersAliveAndInVisible.length > 0 && monstersAliveAndVisible.length == 0) {
+      confirm("Alle zichtbare monsters zijn verslagen. Wil je het spel beëindigen? Zo niet, annuleer en stel de monsters opnieuw in op zichtbaar.")
+      {
+        this.router.navigate(['']);
+      }
     }
 
     return usefullCreatures;
   }
 
+  public onHealthPositiveChanged(healthPower: number, creature: Creature): void {
+    creature.battleHP += healthPower;
 
-
-  public onHealthPositiveChanged(newValue: number, creature: Creature) {
-    const health = creature.battleHP;
-    const healPower = newValue;
-    const newBattleHP = healPower + health;
-
-    if (newBattleHP > creature.maxHP) { return creature.maxHP }
-    else return newBattleHP;
-
+    if (creature.battleHP > creature.maxHP) {
+      creature.battleHP = creature.maxHP
+    }
   }
 
-  public onHealthNegativeChanged(newValue: number, creature: Creature) {
-    const idx = this.creatures.indexOf(creature);
-    this.initiativeNumbers[idx] = newValue;
+  public onHealthNegativeChanged(damage: number, creature: Creature): void {
+    creature.battleHP -= damage;
+
+    if (creature.battleHP <= 0) {
+      creature.battleHP = 0;
+    };
   }
 
   //foutmelding geven als alle monsters op onzichtbaar staan - verder spelen?
   // alert als alle helden dood zijn => nieuw spel beginnen?
   // alle values teru gnaar originele waarden als spel herstart
-
-
 }
-
-
 
 // public getTotal(creature: Creature) : number {
 //   const init = creature.init;

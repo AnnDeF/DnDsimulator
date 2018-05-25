@@ -35,6 +35,7 @@ import { BtnSaveComponent } from './components/shared/btn-save.component';
 import { DetailComponent } from './components/shared/detail.component';
 import { ListOverviewComponent } from './components/shared/list-overview.component';
 import { FilterComponent } from './components/shared/filter.component';
+import { FightToolbarComponent } from './components/shared/fight-toolbar.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -72,6 +73,7 @@ const appRoutes: Routes = [
     DetailComponent,
     ListOverviewComponent,
     FilterComponent,
+    FightToolbarComponent
   ],
   imports: [
     CommonModule,
