@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Monster } from "../models/monster";
+import { Creature } from "../models/creature";
 
 const headerInfo = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
@@ -28,6 +29,10 @@ export class MonsterService {
 
   public updateMonster(monster: Monster): Observable<Monster> {
     return this.http.post<Monster>(this.monstersUrl, monster, headerInfo);
+  }
+
+  public updateCreature(creature: Creature): Observable<Creature> {
+    return this.http.post<Creature>(this.monstersUrl, creature, headerInfo);
   }
 
   public addMonster(monster: Monster): Observable<Monster> {

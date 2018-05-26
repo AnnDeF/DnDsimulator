@@ -21,11 +21,15 @@ export class FightComponent implements OnInit {
   private playerName: string;
   private sortedCreatures: Creature[];
   private heroes: Creature[];
+  private heroesAlive: Creature[];
+  private monstersAliveAndInVisible: Creature[];
+  private monstersAliveAndVisible: Creature[];
   private idx: number = 0;
   private sub: any;
 
   private showStart: boolean = true;
   private showPlayButtons: boolean = false;
+  private isDying:boolean=false;
   private _encounter: Encounter = null;
 
   @Input()
@@ -34,6 +38,9 @@ export class FightComponent implements OnInit {
     if (this._encounter == null) return;
     this.playerName = this._encounter.playerName;
     this.creatures = this._encounter.selectedHeroes.concat(this._encounter.selectedMonsters);
+    this.heroesAlive = this.creatures.filter(creature => !creature.isMonster);
+    this.monstersAliveAndVisible = this.creatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == true);
+    this.monstersAliveAndInVisible = this.creatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == false);
   }
 
   constructor(
@@ -98,20 +105,6 @@ export class FightComponent implements OnInit {
     return result;
   }
 
-  // Spel
-  toggleVisibility(monster: Monster) {
-    monster.isVisible = !monster.isVisible;
-    this.monsterService.updateMonster(monster).subscribe();
-  }
-
-  removeFromFight(creature: Creature) {
-    if (!creature.isMonster) {
-      if (confirm("Ben je zeker dat je deze held wilt verwijderen uit het gevecht?")) {
-        const idx = this.sortedCreatures.indexOf(creature);
-        this.sortedCreatures.splice(idx, 1)
-      }
-    }
-  }
 
   //toolbar
   previous() {
@@ -144,6 +137,21 @@ export class FightComponent implements OnInit {
     this.idx = this.sortedCreatures.indexOf(nextCreature);
   }
 
+ // Spel
+ toggleVisibility(monster: Monster) {
+  monster.isVisible = !monster.isVisible;
+  this.monsterService.updateMonster(monster).subscribe();
+}
+
+removeFromFight(creature: Creature) {
+  if (!creature.isMonster) {
+    if (confirm("Ben je zeker dat je deze held wilt verwijderen uit het gevecht?")) {
+      const idx = this.sortedCreatures.indexOf(creature);
+      this.sortedCreatures.splice(idx, 1)
+    }
+  }
+}
+
   private getUseFullCreatures(): Creature[] {
     let usefullCreatures = this.sortedCreatures.filter(creature => {
       if (creature.isMonster && creature['isVisible'] == false)
@@ -154,25 +162,21 @@ export class FightComponent implements OnInit {
       return true;
     });
 
-    let heroesAlive = this.sortedCreatures.filter(creature => !creature.isMonster);
-    let monstersAliveAndVisible = this.sortedCreatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == true);
-    let monstersAliveAndInVisible = this.sortedCreatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == false);
-
-    if (heroesAlive.length == 0){
+    if (this.heroesAlive.length == 0){
       confirm("Game over! Alle helden zijn verslagen. Wil je een nieuw spel beginnen?")
       {
         this.router.navigate(['']);
       }
     }
 
-    if (monstersAliveAndInVisible.length == 0 && monstersAliveAndVisible.length == 0) {
+    if (this.monstersAliveAndInVisible.length == 0 && this.monstersAliveAndVisible.length == 0) {
       confirm("Gewonnen! Alle monsters zijn verslagen. Wil je een nieuw spel starten?")
       {
         this.router.navigate(['']);
       }
     }
 
-    if (heroesAlive.length > 0 && monstersAliveAndInVisible.length > 0 && monstersAliveAndVisible.length == 0) {
+    if (this.heroesAlive.length > 0 && this.monstersAliveAndInVisible.length > 0 && this.monstersAliveAndVisible.length == 0) {
       confirm("Alle zichtbare monsters zijn verslagen. Wil je het spel beëindigen? Zo niet, annuleer en stel de monsters opnieuw in op zichtbaar.")
       {
         this.router.navigate(['']);
@@ -182,20 +186,39 @@ export class FightComponent implements OnInit {
     return usefullCreatures;
   }
 
-  public onHealthPositiveChanged(healthPower: number, creature: Creature): void {
-    creature.battleHP += healthPower;
+  public onHealthPositiveChanged(healthPower: number, creatureId: number): void {
+    let ally = this.heroesAlive.find(hero => hero.id == creatureId);
+    
+    ally.battleHP += healthPower;
 
-    if (creature.battleHP > creature.maxHP) {
-      creature.battleHP = creature.maxHP
+    if (ally.battleHP > ally.maxHP) {
+      ally.battleHP = ally.maxHP
     }
+
+    this.heroesService.updateHero(ally).subscribe;
   }
 
-  public onHealthNegativeChanged(damage: number, creature: Creature): void {
-    creature.battleHP -= damage;
+  public onHealthNegativeChanged(damage: number, creatureId: number): void {
+    let foe = this.creatures.find(creature => creature.id == creatureId);
 
-    if (creature.battleHP <= 0) {
-      creature.battleHP = 0;
+    foe.battleHP -= damage;
+
+    if (foe.battleHP <= 0) {
+      foe.battleHP = 0;
     };
+
+    if(foe.isMonster)
+      {this.monsterService.updateCreature(foe).subscribe();}
+      else {this.heroesService.updateHero(foe).subscribe();}
+  }
+
+  getCurrentHealthPercentage(creature:Creature){
+    if ((creature.battleHP/creature.maxHP) * 100 >50){    
+      this.isDying=false;
+      return (creature.battleHP/creature.maxHP) * 100 + "%";
+    }
+    else {this.isDying = true;
+      return (creature.battleHP/creature.maxHP) * 100 + "%";}
   }
 
   //foutmelding geven als alle monsters op onzichtbaar staan - verder spelen?
@@ -203,33 +226,3 @@ export class FightComponent implements OnInit {
   // alle values teru gnaar originele waarden als spel herstart
 }
 
-// public getTotal(creature: Creature) : number {
-//   const init = creature.init;
-//   const rolled = this.getInitiative(creature);
-
-//   if ((init + rolled) > 20)  {
-//     return 20;
-//   }
-
-//   return (init + rolled);
-// }
-
-
-  //   Heal(heal: number) {
-  //     var newHP = this.hero.battleHP + heal;
-
-  //     if (newHP > this.hero.maxHP) {
-  //         return this.hero.maxHP;
-  //     }
-  //     else return newHP;
-  // };
-
-  // doDamage(damage: number) {
-  //     var newHP = this.hero.battleHP - damage;
-  //     if (newHP <= 0) {
-  //         return 0;
-  //     }
-  //     else {
-  //         return newHP;
-  //     }
-  // };

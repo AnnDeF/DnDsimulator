@@ -1,6 +1,6 @@
 
 .active{
-    background-color: #d91f26;
+    background-color: '';
     color: #000;
     font-weight: bold;
 }
@@ -9,11 +9,15 @@
     opacity: 0.5;
 }
 
-.isDying {
-    border: 2px solid red;
-}
-
 .labelFight{
     color:white;
+}
+
+.progress{
+    height:100px;
+}
+
+.progress-bar{
+    height:100px;
 }
 
