@@ -16,7 +16,7 @@ export class BtnSaveComponent {
     @Output()
     public onClick: EventEmitter<void> = new EventEmitter();
 
-    public save() : void {
+    public save(): void {
         this.onClick.emit();
     }
 }

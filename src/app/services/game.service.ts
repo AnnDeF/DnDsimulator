@@ -21,8 +21,8 @@ export class GameService {
   private _initiativeNumbers = new Subject<number[]>();
   public get initiativeNumbers(): Observable<number[]> { return this._initiativeNumbers.asObservable(); };
 
-  private currentEncounter : Encounter;
-  private showInitiative : boolean = false;
+  private currentEncounter: Encounter;
+  private showInitiative: boolean = false;
   private showFight: boolean = false;
 
   constructor(
@@ -36,7 +36,7 @@ export class GameService {
     encounter.encounterNaam = encounterNaam;
     encounter.selectedHeroes = [];
     encounter.selectedMonsters = [];
-     
+
     this.encounterService.addEncounter(encounter)
       .pipe(map((encounter) => {
         this.router.navigate(['/main', encounter.id]);
@@ -46,13 +46,13 @@ export class GameService {
       ).subscribe();
   }
 
-  startNewEncounterWithId(encounterId: number, playerName: string){
-      this.encounterService.getEncounter(encounterId)
-        .subscribe(encounter => {
-          this.router.navigate(['/main', encounter.id]);
-          this.currentEncounter = encounter;
-          this._encounter.next(encounter);
-        });  
+  startNewEncounterWithId(encounterId: number, playerName: string): void {
+    this.encounterService.getEncounter(encounterId)
+      .subscribe(encounter => {
+        this.router.navigate(['/main', encounter.id]);
+        this.currentEncounter = encounter;
+        this._encounter.next(encounter);
+      });
 
   }
 
@@ -65,15 +65,15 @@ export class GameService {
       });
   }
 
-  addHero(hero: Hero) {
+  addHero(hero: Hero): void {
     this._onHeroSelected.next(hero);
   }
 
-  addMonster(monster: Monster) {
+  addMonster(monster: Monster): void {
     this._onMonsterSelected.next(monster);
   }
 
-  public startGame() {
+  public startGame(): void {
     this.showInitiative = true;
   }
 

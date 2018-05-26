@@ -21,21 +21,21 @@ export class EncounteroverviewComponent implements OnInit {
     this.refresh();
   }
 
-  refresh() {
+  public refresh(): void {
     this.encounterService.getEncounters().subscribe(encounters => { this.encounters = encounters, this.filteredEncounters = encounters });
   }
 
-  openEncounter(id: number) {
+  public openEncounter(id: number): void {
     this.gameService.openEncounter(id);
   }
 
-  deleteEncounter(id: number) {
+  public deleteEncounter(id: number): void {
     this.encounterService.deleteEncounter(id).subscribe(() => {
       this.refresh();
     });
   }
 
-  performFilter(filterBy: string): void {
+  public performFilter(filterBy: string): void {
     if (filterBy) {
       filterBy = filterBy.toLocaleLowerCase();
       this.filteredEncounters = this.encounters.filter((encounter: Encounter) => encounter.encounterNaam.toLocaleLowerCase().indexOf(filterBy) !== -1);

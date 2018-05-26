@@ -18,7 +18,7 @@ export class EncounterDetailComponent implements OnInit {
   change: EventEmitter<Creature> = new EventEmitter<Creature>();
 
   private _encounter: Encounter = null;
-  
+
   @Input()
   set encounter(encounter: Encounter) {
     this._encounter = encounter;
@@ -40,32 +40,32 @@ export class EncounterDetailComponent implements OnInit {
     })
   }
 
-  saveEncounter() {
+  public saveEncounter(): void {
     this.encounterService.updateEncounter(this._encounter).subscribe();
   }
 
-  removeMonsterFromEncounter(monster: Monster) {
+  public removeMonsterFromEncounter(monster: Monster): void {
     const idx = this._encounter.selectedMonsters.indexOf(monster);
     this._encounter.selectedMonsters.splice(idx, 1)
   }
 
-  removeHeroFromEncounter(hero:Hero) {
+  public removeHeroFromEncounter(hero: Hero): void {
     const idx = this._encounter.selectedHeroes.indexOf(hero);
     this._encounter.selectedHeroes.splice(idx, 1)
   }
 
-  clearEncounter(encounter) {
+  public clearEncounter(encounter): void {
     this._encounter.selectedHeroes = [];
     this._encounter.selectedMonsters = [];
     this.encounterService.updateEncounter(this._encounter).subscribe();
   }
 
-  startGame() {
+  public startGame(): void {
     this.gameService.startGame();
   }
 
-  isMonster(creature):boolean{
-    if (creature instanceof Monster){
+  public isMonster(creature): boolean {
+    if (creature instanceof Monster) {
       return true;
     }
     else return false;

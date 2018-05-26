@@ -7,12 +7,13 @@ import { EncounterService } from '../../services/encounter.service';
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styles: ['container{margin-top: 20%}']
 })
+
 export class HomeComponent implements OnInit {
   private showText: boolean = false;
   private showNumber: boolean = false;
-  private encounter:Encounter;
+  private encounter: Encounter;
   private encounterNaam: string;
   private encounterId: number;
   private playerNaam: string;
@@ -25,20 +26,20 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  startGameWithName(){
+  startGameWithName(): void {
     this.gameService.startNewEncounterWithName(this.encounterNaam, this.playerNaam);
   }
 
-  startGameWithId(){
+  startGameWithId(): void {
     this.gameService.startNewEncounterWithId(this.encounterId, this.playerNaam);
   }
 
-  showTextField() {
+  showTextField(): void {
     this.showNumber = false;
     this.showText = !this.showText;
   }
 
-  showNumberField() {
+  showNumberField(): void {
     this.showText = false;
     this.showNumber = !this.showNumber;
   }

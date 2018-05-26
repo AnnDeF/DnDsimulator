@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 export class EncounterComponent implements OnInit, OnDestroy {
   private sub: Subject<boolean> = new Subject<boolean>();
   private encounter: Encounter;
-  
+
 
   constructor(
     private encounterService: EncounterService,

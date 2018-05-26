@@ -46,10 +46,6 @@ export class FightToolbarComponent {
     public onSubmitHeal: EventEmitter<object> = new EventEmitter();
     @Output()
     public onSubmitDamage: EventEmitter<object> = new EventEmitter();
-    @Output()
-    public onClickToggleVisibility: EventEmitter<Creature> = new EventEmitter();
-    @Output()
-    public onClickRemoveFromFight: EventEmitter<Creature> = new EventEmitter();
 
     public onHealthNegativeChanged(): void {
         this.onSubmitDamage.emit({ amount: this.damage, target: this.selectedCreatureId });
@@ -57,14 +53,6 @@ export class FightToolbarComponent {
 
     public onHealthPositiveChanged(): void {
         this.onSubmitHeal.emit({ amount: this.heal, target: this.selectedCreatureId });
-    }
-
-    public toggleVisibility(creature: Creature): void {
-        this.onClickToggleVisibility.emit(creature);
-    }
-
-    public removeFromFight(creature: Creature) {
-        this.onClickRemoveFromFight.emit(creature);
     }
 
 }

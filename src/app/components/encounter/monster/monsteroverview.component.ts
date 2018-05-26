@@ -5,29 +5,44 @@ import { GameService } from '../../../services/game.service';
 
 @Component({
   selector: 'monsteroverview',
-  templateUrl: './monsteroverview.html'
+  template: `<div class="btn-toolbar justify-content-start" role="toolbar">
+  <button type="button" class="btn btn-secondary" [routerLink]="['create']">
+      Add hero
+  </button>
+
+  <filter (onChange)="performFilter($event)"></filter>
+
+</div>
+<list-overview [creatures]='filteredMonsters' 
+              [creature]='monster' 
+              (onClickSortByHP)='sortByHP()' 
+              (onClickSortByAC)='sortByAC()' 
+              (onClickAddCreature)='addToEncounter($event)' 
+              (onClickDeleteCreature)='deleteMonster($event)'
+              ></list-overview>
+`
 })
 export class MonsteroverviewComponent implements OnInit {
   private monsters: Monster[];
   private sorted: boolean = false;
- 
+
   private filteredMonsters: Monster[];
 
-  constructor(private monsterService: MonsterService, private gameService:GameService) { }
+  constructor(private monsterService: MonsterService, private gameService: GameService) { }
 
   ngOnInit() {
     this.refresh();
   }
 
   refresh() {
-    this.monsterService.getMonsters().subscribe(monsters => {this.monsters = monsters; this.filteredMonsters = monsters});
+    this.monsterService.getMonsters().subscribe(monsters => { this.monsters = monsters; this.filteredMonsters = monsters });
   }
 
-  addToEncounter(monster:Monster){
+  public addToEncounter(monster: Monster): void {
     this.gameService.addMonster(monster)
   }
 
-  performFilter(filterBy: string): void {
+  public performFilter(filterBy: string): void {
     if (filterBy) {
       filterBy = filterBy.toLocaleLowerCase();
       this.filteredMonsters = this.monsters.filter((monster: Monster) => monster.naam.toLocaleLowerCase().indexOf(filterBy) !== -1);
@@ -36,11 +51,11 @@ export class MonsteroverviewComponent implements OnInit {
     }
   }
 
-  deleteMonster(id: number){
+  public deleteMonster(id: number): void {
     this.monsterService.deleteMonster(id).subscribe(() => { this.refresh(); });
   }
 
-  sortByHP() {
+  public sortByHP(): void {
     this.sorted = !this.sorted;
     if (this.sorted) {
       this.monsters.sort(function (a: Monster, b: Monster) {
@@ -66,7 +81,7 @@ export class MonsteroverviewComponent implements OnInit {
     }
   }
 
-  sortByAC() {
+  public sortByAC(): void {
     this.sorted = !this.sorted;
     if (this.sorted) {
       this.monsters.sort(function (a: Monster, b: Monster) {

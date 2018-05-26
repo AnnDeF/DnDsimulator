@@ -5,11 +5,10 @@ import { Creature } from '../../../models/creature';
 import { Encounter } from '../../../models/encounter';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'roll-initiative',
   templateUrl: './roll-initiative.html',
-  styleUrls: ['./roll-initiative.css']
+  styles: ['span{float:right}']
 })
 export class RollInitiativeComponent implements OnInit {
   private initiativeNumbers: number[];
@@ -41,7 +40,7 @@ export class RollInitiativeComponent implements OnInit {
   }
 
   // bepalen initiatief en sorteren
-  decideInitiative() {
+  public decideInitiative(): void {
     this.initiativeNumbers = [];
 
     this.creatures.forEach(creature => {
@@ -67,7 +66,7 @@ export class RollInitiativeComponent implements OnInit {
     return (init + rolled);
   }
 
-  public onInitiativeChanged(newValue: number, creature: Creature) {
+  public onInitiativeChanged(newValue: number, creature: Creature): void {
     const idx = this.creatures.indexOf(creature);
     this.initiativeNumbers[idx] = newValue;
 
@@ -78,7 +77,7 @@ export class RollInitiativeComponent implements OnInit {
     this.sortedCreatures = this.creatures.concat().sort((a, b) => this.sortByInitiative(a, b));
   }
 
-  sortByInitiative(a: Creature, b: Creature): number {
+  public sortByInitiative(a: Creature, b: Creature): number {
     if (this.initiativeNumbers.length == 0)
       return b.init - a.init;
 

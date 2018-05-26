@@ -40,7 +40,7 @@ export class HeroDetailComponent implements OnInit {
         this.refresh();
     }
 
-    refresh() {
+    public refresh():void {
         this.sub = this.route.params.subscribe(params => {
             let Id = +params['id']; // (+) converts string 'id' to a number
             this.isNew = isNaN(Id);
@@ -64,12 +64,12 @@ export class HeroDetailComponent implements OnInit {
         });
     }
 
-    return(): void {
+    public return(): void {
         this.router.navigate(['../'], { relativeTo: this.route });
 
     }
 
-    addHero() {
+    public addHero():void {
         const newHero = {
             id: null,
             naam: this.hero.naam,
@@ -83,7 +83,7 @@ export class HeroDetailComponent implements OnInit {
     }
 
 
-    updateHero() {
+    public updateHero():void {
         const hero = {
             id: this.hero.id,
             naam: this.hero.naam,
@@ -95,7 +95,4 @@ export class HeroDetailComponent implements OnInit {
         }
         this.heroService.updateHero(hero).subscribe(hero => { this.hero = hero, this.return() });
     }
-
-
-
 }

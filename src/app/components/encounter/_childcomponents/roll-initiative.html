@@ -13,7 +13,7 @@
             </label>
             <div class="w-50">
                 <input type="number" min="0" max="20" [ngModel]="getInitiative(creature)" (ngModelChange)="onInitiativeChanged($event, creature)">
-                <span style="float: right"> {{getTotal(creature) | json}} </span>
+                <span> {{getTotal(creature) | json}} </span>
             </div>
         </div>
     </li>

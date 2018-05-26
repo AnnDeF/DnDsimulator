@@ -53,7 +53,7 @@ export class FightComponent implements OnInit {
   }
 
   // bepalen initiatief en sorteren
-  decideInitiative() {
+  public decideInitiative(): void {
     this.initiativeNumbers = [];
 
     this.creatures.forEach(creature => {
@@ -79,7 +79,7 @@ export class FightComponent implements OnInit {
     return (init + rolled);
   }
 
-  public onInitiativeChanged(newValue: number, creature: Creature) {
+  public onInitiativeChanged(newValue: number, creature: Creature): void {
     const idx = this.creatures.indexOf(creature);
     this.initiativeNumbers[idx] = newValue;
 
@@ -90,7 +90,7 @@ export class FightComponent implements OnInit {
     this.sortedCreatures = this.creatures.concat().sort((a, b) => this.sortByInitiative(a, b));
   }
 
-  sortByInitiative(a: Creature, b: Creature): number {
+  public sortByInitiative(a: Creature, b: Creature): number {
     if (this.initiativeNumbers.length == 0)
       return b.init - a.init;
 
@@ -104,7 +104,7 @@ export class FightComponent implements OnInit {
 
 
   //toolbar
-  previous() {
+  public previous(): void {
     const usefullCreatures = this.getUseFullCreatures();
     const currentCreature = this.sortedCreatures[this.idx];
     let usefullIdx = usefullCreatures.indexOf(currentCreature);
@@ -119,7 +119,7 @@ export class FightComponent implements OnInit {
     this.idx = this.sortedCreatures.indexOf(nextCreature);
   }
 
-  next() {
+  public next(): void {
     const usefullCreatures = this.getUseFullCreatures();
     const currentCreature = this.sortedCreatures[this.idx];
     let usefullIdx = usefullCreatures.indexOf(currentCreature);
@@ -135,12 +135,12 @@ export class FightComponent implements OnInit {
   }
 
   // Spel
-  toggleVisibility(monster: Monster) {
+  public toggleVisibility(monster: Monster): void {
     monster.isVisible = !monster.isVisible;
     this.monsterService.updateMonster(monster).subscribe();
   }
 
-  removeFromFight(creature: Creature) {
+  public removeFromFight(creature: Creature): void {
     if (!creature.isMonster) {
       if (confirm("Ben je zeker dat je deze held wilt verwijderen uit het gevecht?")) {
         const idx = this.sortedCreatures.indexOf(creature);
@@ -166,22 +166,19 @@ export class FightComponent implements OnInit {
     console.log('get usefull creatures...', this.heroesAlive.length, this.monstersAliveAndInVisible.length, this.monstersAliveAndVisible.length);
 
     if (this.heroesAlive.length == 0) {
-      if (confirm("Game over! Alle helden zijn verslagen. Wil je een nieuw spel beginnen?"))
-      {
+      if (confirm("Game over! Alle helden zijn verslagen. Wil je een nieuw spel beginnen?")) {
         this.router.navigate(['']);
       }
     }
 
     if (this.monstersAliveAndInVisible.length == 0 && this.monstersAliveAndVisible.length == 0) {
-      if (confirm("Gewonnen! Alle monsters zijn verslagen. Wil je een nieuw spel starten?"))
-      {
+      if (confirm("Gewonnen! Alle monsters zijn verslagen. Wil je een nieuw spel starten?")) {
         this.router.navigate(['']);
       }
     }
 
     if (this.heroesAlive.length > 0 && this.monstersAliveAndInVisible.length > 0 && this.monstersAliveAndVisible.length == 0) {
-      if (confirm("Alle zichtbare monsters zijn verslagen. Wil je het spel beëindigen? Zo niet, annuleer en stel de monsters opnieuw in op zichtbaar."))
-      {
+      if (confirm("Alle zichtbare monsters zijn verslagen. Wil je het spel beëindigen? Zo niet, annuleer en stel de monsters opnieuw in op zichtbaar.")) {
         this.router.navigate(['']);
       }
     }
@@ -220,7 +217,7 @@ export class FightComponent implements OnInit {
     else { this.heroesService.updateHero(foe).subscribe(); }
   }
 
-  getCurrentHealthPercentage(creature: Creature) {
+  public getCurrentHealthPercentage(creature: Creature): string {
     const percentage = this.percentage(creature);
     if (percentage > 50) {
       //creature['isDying'] = false;
@@ -232,7 +229,7 @@ export class FightComponent implements OnInit {
     }
   }
 
-  getProgressClass(creature: Creature) {
+  public getProgressClass(creature: Creature) {
     const percentage = this.percentage(creature);
 
     if (percentage == 100) return 'bg-success';
