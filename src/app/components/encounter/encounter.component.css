@@ -1,5 +1,5 @@
 #headerFoto{
-    width:100%;
+    max-height: 120px;
 }
 
 .wrapper{
@@ -17,7 +17,9 @@
 }
 
 .encounterTitel{
-    font-family: serif;
-    text-shadow: 0 0 1px  white, 0 0 25px #d91f26, 0 0 5px  #d91f26 ;
-
+    color: rgb(33, 37, 41);
+    font-family: serif;    
+    text-shadow: 0 0 3px red, 0 0 5px #d91f26, 0 0 2px #FF0000, 0 0 5px #d91f26;
+    text-decoration: underline;
+    text-decoration-line: underline overline;
 }

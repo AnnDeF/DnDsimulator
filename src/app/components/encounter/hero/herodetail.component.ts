@@ -9,12 +9,22 @@ import { Observable } from 'rxjs';
 @Component({
     selector: 'hero',
     template: `<div *ngIf="hero" class="container">
-    <h3>{{hero.naam}}</h3>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-6">
+            <h3>{{hero.naam}}</h3>
+        </div>
+    </div>
 
     <detail [creature]="hero"></detail>
 
-    <btn-save *ngIf="isNew" (onClick)="addHero()"  title="Hero opslaan"></btn-save>
-    <btn-save *ngIf="!isNew" (onClick)="updateHero()"></btn-save>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-6">
+            <btn-save *ngIf="isNew" (onClick)="addHero()"  title="Hero opslaan"></btn-save>
+            <btn-save *ngIf="!isNew" (onClick)="updateHero()"></btn-save>
+        </div>
+    </div>
 </div>` 
 })
 export class HeroDetailComponent implements OnInit {

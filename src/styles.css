@@ -12,6 +12,17 @@ html {
 body {
     background-image: url("./assets/home-background.jpg");
     background-size: cover;
-    /* background-size: 100%;
-    min-height: 100%; */
+    color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #d91f26;
+}
+
+h1 {
+    text-align: center;
+}
+
+.list-group-item {
+    background-color: rgba(255, 255, 255, 0.1);
 }

@@ -29,7 +29,7 @@ export class FightComponent implements OnInit {
 
   private showStart: boolean = true;
   private showPlayButtons: boolean = false;
-  private isDying:boolean=false;
+  private isDying: boolean = false;
   private _encounter: Encounter = null;
 
   @Input()
@@ -38,9 +38,6 @@ export class FightComponent implements OnInit {
     if (this._encounter == null) return;
     this.playerName = this._encounter.playerName;
     this.creatures = this._encounter.selectedHeroes.concat(this._encounter.selectedMonsters);
-    this.heroesAlive = this.creatures.filter(creature => !creature.isMonster);
-    this.monstersAliveAndVisible = this.creatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == true);
-    this.monstersAliveAndInVisible = this.creatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == false);
   }
 
   constructor(
@@ -137,20 +134,20 @@ export class FightComponent implements OnInit {
     this.idx = this.sortedCreatures.indexOf(nextCreature);
   }
 
- // Spel
- toggleVisibility(monster: Monster) {
-  monster.isVisible = !monster.isVisible;
-  this.monsterService.updateMonster(monster).subscribe();
-}
+  // Spel
+  toggleVisibility(monster: Monster) {
+    monster.isVisible = !monster.isVisible;
+    this.monsterService.updateMonster(monster).subscribe();
+  }
 
-removeFromFight(creature: Creature) {
-  if (!creature.isMonster) {
-    if (confirm("Ben je zeker dat je deze held wilt verwijderen uit het gevecht?")) {
-      const idx = this.sortedCreatures.indexOf(creature);
-      this.sortedCreatures.splice(idx, 1)
+  removeFromFight(creature: Creature) {
+    if (!creature.isMonster) {
+      if (confirm("Ben je zeker dat je deze held wilt verwijderen uit het gevecht?")) {
+        const idx = this.sortedCreatures.indexOf(creature);
+        this.sortedCreatures.splice(idx, 1)
+      }
     }
   }
-}
 
   private getUseFullCreatures(): Creature[] {
     let usefullCreatures = this.sortedCreatures.filter(creature => {
@@ -162,22 +159,28 @@ removeFromFight(creature: Creature) {
       return true;
     });
 
-    if (this.heroesAlive.length == 0){
-      confirm("Game over! Alle helden zijn verslagen. Wil je een nieuw spel beginnen?")
+    this.heroesAlive = usefullCreatures.filter(creature => !creature.isMonster);
+    this.monstersAliveAndVisible = this.creatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == true);
+    this.monstersAliveAndInVisible = this.creatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == false);
+
+    console.log('get usefull creatures...', this.heroesAlive.length, this.monstersAliveAndInVisible.length, this.monstersAliveAndVisible.length);
+
+    if (this.heroesAlive.length == 0) {
+      if (confirm("Game over! Alle helden zijn verslagen. Wil je een nieuw spel beginnen?"))
       {
         this.router.navigate(['']);
       }
     }
 
     if (this.monstersAliveAndInVisible.length == 0 && this.monstersAliveAndVisible.length == 0) {
-      confirm("Gewonnen! Alle monsters zijn verslagen. Wil je een nieuw spel starten?")
+      if (confirm("Gewonnen! Alle monsters zijn verslagen. Wil je een nieuw spel starten?"))
       {
         this.router.navigate(['']);
       }
     }
 
     if (this.heroesAlive.length > 0 && this.monstersAliveAndInVisible.length > 0 && this.monstersAliveAndVisible.length == 0) {
-      confirm("Alle zichtbare monsters zijn verslagen. Wil je het spel beëindigen? Zo niet, annuleer en stel de monsters opnieuw in op zichtbaar.")
+      if (confirm("Alle zichtbare monsters zijn verslagen. Wil je het spel beëindigen? Zo niet, annuleer en stel de monsters opnieuw in op zichtbaar."))
       {
         this.router.navigate(['']);
       }
@@ -188,14 +191,17 @@ removeFromFight(creature: Creature) {
 
   public onHealthPositiveChanged(healthPower: number, creatureId: number): void {
     let ally = this.heroesAlive.find(hero => hero.id == creatureId);
-    
+
     ally.battleHP += healthPower;
+    if (this.percentage(ally) > 50) {
+      ally['isDying'] = false;
+    }
 
     if (ally.battleHP > ally.maxHP) {
       ally.battleHP = ally.maxHP
     }
 
-    this.heroesService.updateHero(ally).subscribe;
+    this.heroesService.updateHero(ally).subscribe();
   }
 
   public onHealthNegativeChanged(damage: number, creatureId: number): void {
@@ -203,22 +209,41 @@ removeFromFight(creature: Creature) {
 
     foe.battleHP -= damage;
 
+    if (this.percentage(foe) <= 50) {
+      foe['isDying'] = true;
+    }
     if (foe.battleHP <= 0) {
       foe.battleHP = 0;
     };
 
-    if(foe.isMonster)
-      {this.monsterService.updateCreature(foe).subscribe();}
-      else {this.heroesService.updateHero(foe).subscribe();}
+    if (foe.isMonster) { this.monsterService.updateCreature(foe).subscribe(); }
+    else { this.heroesService.updateHero(foe).subscribe(); }
   }
 
-  getCurrentHealthPercentage(creature:Creature){
-    if ((creature.battleHP/creature.maxHP) * 100 >50){    
-      this.isDying=false;
-      return (creature.battleHP/creature.maxHP) * 100 + "%";
+  getCurrentHealthPercentage(creature: Creature) {
+    const percentage = this.percentage(creature);
+    if (percentage > 50) {
+      //creature['isDying'] = false;
+      return percentage + "%";
     }
-    else {this.isDying = true;
-      return (creature.battleHP/creature.maxHP) * 100 + "%";}
+    else {
+      //this.isDying = true;
+      return percentage + "%";
+    }
+  }
+
+  getProgressClass(creature: Creature) {
+    const percentage = this.percentage(creature);
+
+    if (percentage == 100) return 'bg-success';
+    if (percentage > 50) return 'bg-info';
+    if (percentage > 20) return 'bg-warning';
+
+    return 'bg-danger';
+  }
+
+  private percentage(creature: Creature): number {
+    return (creature.battleHP / creature.maxHP) * 100;
   }
 
   //foutmelding geven als alle monsters op onzichtbaar staan - verder spelen?

@@ -2,17 +2,20 @@
   <img id="headerFoto" src="assets/stranger-games.png" alt="stranger-games">
 </header>
 
-<div class="wrapper">
+<div class="wrapper" *ngIf="!gameService.showInitiative && !gameService.showFight">
   <section class="library">
-    <library *ngIf="!gameService.showInitiative && !gameService.showFight"></library>
+    <library></library>
   </section>
 
   <section class="encounterDetail">
     <h1 class="encounterTitel">{{encounter?.encounterNaam}}</h1>
 
-    <encounterdetail [encounter]="encounter" *ngIf="!gameService.showInitiative && !gameService.showFight"></encounterdetail>
-    <roll-initiative [encounter]="encounter" *ngIf="gameService.showInitiative"></roll-initiative>
-    <fight [encounter]="encounter" *ngIf="gameService.showFight"></fight>
+    <encounterdetail [encounter]="encounter"></encounterdetail>
   </section>
 </div>
 
+<div class="container" *ngIf="gameService.showInitiative || gameService.showFight">
+  <h1 class="encounterTitel">{{encounter?.encounterNaam}}</h1>
+  <roll-initiative [encounter]="encounter" *ngIf="gameService.showInitiative"></roll-initiative>
+  <fight [encounter]="encounter" *ngIf="gameService.showFight"></fight>
+</div>

@@ -1,14 +1,13 @@
-<!-- <img class="homeAchtergrond" src="../../../assets/home-background.jpg"> -->
-
-<div class="container">
-    <div class="row align-items-center" *ngIf="!showNumber">
+<div class="container" style="margin-top: 20%;">
+    <div class="row mb-2 align-items-center" *ngIf="!showNumber">
         <div class="col text-center">
             <button class="newAdv" (click)="showTextField()">
                 <img src="../../../assets/new-adventure.png">
             </button>
         </div>
     </div>
-    <div class="row align-items-center" *ngIf="!showText">
+
+    <div class="row mb-2 align-items-center" *ngIf="!showText">
         <div class="col  text-center">
             <button class="idAdv" (click)="showNumberField()">
                 <img src="../../../assets/AdventureId.png">
@@ -16,30 +15,30 @@
         </div>
     </div>
 
-    <div class="row align-items-center">
-        <div class="col  text-center">
-            <form *ngIf="showText" class="form-group nameForm">
-                <input required class="form-control" type="text" placeholder="Naam Encounter" name="naam" [(ngModel)]="encounterNaam">
-                <input required class="form-control" type="text" placeholder="Naam speler" name="playerNaam" [(ngModel)]="playerNaam">
-                <button type="submit" (click)="startGameWithName()">Enter</button>
-                <button type="reset" (click)="cancel()">Cancel</button>
+    <div class="row align-items-center" *ngIf="showText">
+        <div class="col text-center">
+            <form class="form-inline justify-content-center nameForm">
+                <input required class="form-control mr-2" type="text" placeholder="Naam Encounter" name="naam" [(ngModel)]="encounterNaam">
+                <input required class="form-control mr-2" type="text" placeholder="Naam speler" name="playerNaam" [(ngModel)]="playerNaam">
+                <button class="btn btn-primary mr-2" type="submit" (click)="startGameWithName()">Enter</button>
+                <button class="btn btn-secondary" type="reset" (click)="showTextField()">Cancel</button>
             </form>
         </div>
     </div>
 
-    <div class="row align-items-center">
-        <div class="col  text-center">
-            <form *ngIf="showNumber" class="form-group idForm">
-                <div class="input-group">
+    <div class="row align-items-center" *ngIf="showNumber">
+        <div class="col text-center">
+            <form class="form-inline justify-content-center idForm">
+                <div class="input-group mr-2">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">EncounterId</span>
                     </div>
                     <input required class="form-control" type="number" placeholder="0" name="encounterId" [(ngModel)]="encounterId">
                 </div>
 
-                <input required class="form-control" type="text" placeholder="Naam speler" name="playerNaam" [(ngModel)]="playerNaam">
-                <button type="submit" (click)="startGameWithId()">Enter</button>
-                <button type="reset" (click)="cancel()">Cancel</button>
+                <input required class="form-control mr-2" type="text" placeholder="Naam speler" name="playerNaam" [(ngModel)]="playerNaam">
+                <button class="btn btn-primary mr-2" type="submit" (click)="startGameWithId()">Enter</button>
+                <button class="btn btn-secondary" type="reset" (click)="showNumberField()">Cancel</button>
             </form>
         </div>
     </div>

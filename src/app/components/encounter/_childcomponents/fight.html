@@ -1,26 +1,6 @@
-<h6>Fight</h6>
+<h2>Fight</h2>
 
-<ul class="list-group">
-    <li class="list-group-item progress" *ngFor="let creature of sortedCreatures; let i = index" 
-    [ngClass]="{'active': i == idx, 'isInvisible': creature.isMonster && !creature.isVisible, 'isDying': creature.isDying }"
->
-    <div class="d-flex flex-row justify-content-between progress-bar bg-danger" [style.width]="active ? 'creature.getCurrentHealth()' : '' ">
-            <label class="w-75">
-                {{creature.naam}} - {{creature.battleHP}}/{{creature.maxHP}}
-            </label>
-    
-            <small class="w-25" style="text-align: right" *ngIf="!creature.isMonster">
-                    {{_encounter.playerName}}
-            </small>
-
-        <fight-toolbar [monstersAliveAndVisible]="monstersAliveAndVisible" [heroesAlive]="heroesAlive" [creature]='creature' (onSubmitDamage)="onHealthNegativeChanged($event, creature.id)" (onSubmitHeal)="onHealthPositiveChanged($event, creature.id)" 
-            (onClickToggleVisibility)="toggleVisibility($event)" (onClickRemoveFromFight)="removeFromFight($event)"
-            *ngIf="i == idx"></fight-toolbar>
-        </div>
-    </li>
-</ul>
-
-<div class="btn-group">
+<div class="btn-group mb-2">
     <button class="btn btn-secondary" (click)="previous()">
         <span class="fa fa-step-backward"></span>
     </button>
@@ -29,6 +9,23 @@
     </button>
 </div>
 
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let creature of sortedCreatures; let i = index" [ngClass]="{'active': i == idx, 'isInvisible': creature.isMonster && !creature.isVisible, 'isDying': creature.isDying }">
+        <label class="w-75">
+            <button type="button" class="btn btn-secondary btn-sm" *ngIf="creature.isMonster" (click)="toggleVisibility(creature)">
+                <span class="fa" [ngClass]="{ 'fa-eye-slash': !creature.isVisible, 'fa-eye': creature.isVisible}"></span>
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" *ngIf="!creature.isMonster" (click)="removeFromFight(creature)">
+                <span class="fa fa-trash"></span>
+            </button>
+            {{creature.naam}} - {{creature.battleHP}}/{{creature.maxHP}}
+        </label>
 
+        <div class="progress mb-2">
+            <div class="progress-bar" [ngClass]="getProgressClass(creature)" role="progressbar" [ngStyle]="{ 'width': getCurrentHealthPercentage(creature) }"></div>
+        </div>
 
-   <!-- [style.width]="active ? 'creature.getCurrentHealth()' : '' " -->
+        <fight-toolbar [creatures]="sortedCreatures" [creature]='creature' (onSubmitDamage)="onHealthNegativeChanged($event.amount, $event.target)"
+            (onSubmitHeal)="onHealthPositiveChanged($event.amount, $event.target)" *ngIf="i == idx"></fight-toolbar>
+    </li>
+</ul>
