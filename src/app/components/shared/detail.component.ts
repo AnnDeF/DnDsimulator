@@ -35,6 +35,7 @@ import { Hero } from '../../models/hero';
     </div>
 </form>
   `
+
 })
 export class DetailComponent {
     @Input()

@@ -10,7 +10,9 @@
 </div>
 
 <ul class="list-group">
-    <li class="list-group-item" *ngFor="let creature of sortedCreatures; let i = index" [ngClass]="{'active': i == idx, 'isInvisible': creature.isMonster && !creature.isVisible, 'isDying': creature.isDying }">
+    <li class="list-group-item" *ngFor="let creature of sortedCreatures; let i = index" [ngClass]="{'active': i == idx, 'isInvisible': creature.isMonster && !creature.isVisible, 'isDying': creature.isDying, 'isDead':creature.isDead }">
+        <small class="spelerNaam" *ngIf="!creature.isMonster">{{playerName}}</small>
+
         <label class="w-75">
             <button type="button" class="btn btn-secondary btn-sm" *ngIf="creature.isMonster" (click)="toggleVisibility(creature)">
                 <span class="fa" [ngClass]="{ 'fa-eye-slash': !creature.isVisible, 'fa-eye': creature.isVisible}"></span>
@@ -25,7 +27,9 @@
             <div class="progress-bar" [ngClass]="getProgressClass(creature)" role="progressbar" [ngStyle]="{ 'width': getCurrentHealthPercentage(creature) }"></div>
         </div>
 
-        <fight-toolbar [creatures]="sortedCreatures" [creature]='creature' (onSubmitDamage)="onHealthNegativeChanged($event.amount, $event.target)"
+        <fight-toolbar [creatures]="getUseFullCreatures()" [creature]='creature' (onSubmitDamage)="onHealthNegativeChanged($event.amount, $event.target)"
             (onSubmitHeal)="onHealthPositiveChanged($event.amount, $event.target)" *ngIf="i == idx"></fight-toolbar>
+
+        
     </li>
 </ul>

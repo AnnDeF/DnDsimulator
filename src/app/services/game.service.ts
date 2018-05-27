@@ -30,7 +30,7 @@ export class GameService {
     private router: Router
   ) { }
 
-  startNewEncounterWithName(encounterNaam: string, playerName: string): void {
+  public startNewEncounterWithName(encounterNaam: string, playerName: string): void {
     const encounter = new Encounter();
     encounter.playerName = playerName;
     encounter.encounterNaam = encounterNaam;
@@ -46,38 +46,44 @@ export class GameService {
       ).subscribe();
   }
 
-  startNewEncounterWithId(encounterId: number, playerName: string): void {
+  public startNewEncounterWithId(encounterId: number, playerName: string): void {
+    this.encounterService.getEncounter(encounterId)
+      .subscribe(encounter => {
+        encounter.playerName = playerName;
+        this.encounterService.updateEncounter(encounter).subscribe(() => {
+          this.router.navigate(['/main', encounter.id]);
+        });
+      },
+        (err) => {
+          alert("Deze Id bestaat niet. Voer een ander id in.");
+          console.log(err.message);
+        });
+
+  }
+
+  public openEncounter(encounterId: number): void {
     this.encounterService.getEncounter(encounterId)
       .subscribe(encounter => {
         this.router.navigate(['/main', encounter.id]);
         this.currentEncounter = encounter;
         this._encounter.next(encounter);
       });
-
   }
 
-  openEncounter(encounterId: number): void {
-    this.encounterService.getEncounter(encounterId)
-      .subscribe(encounter => {
-        this.router.navigate(['/main', encounter.id]);
-        this.currentEncounter = encounter;
-        this._encounter.next(encounter);
-      });
-  }
-
-  addHero(hero: Hero): void {
+  public addHero(hero: Hero): void {
     this._onHeroSelected.next(hero);
   }
 
-  addMonster(monster: Monster): void {
+  public addMonster(monster: Monster): void {
     this._onMonsterSelected.next(monster);
   }
 
   public startGame(): void {
     this.showInitiative = true;
+    this.router.navigate(['/main', this.currentEncounter.id]);
   }
 
-  rollInitiative(): number {
+  public rollInitiative(): number {
     return Math.floor(Math.random() * 20) + 1;
   }
 

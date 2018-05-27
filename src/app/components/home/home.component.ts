@@ -7,7 +7,7 @@ import { EncounterService } from '../../services/encounter.service';
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styles: ['container{margin-top: 20%}']
+  styles: ['.container{margin-top: 20%}']
 })
 
 export class HomeComponent implements OnInit {
@@ -20,26 +20,27 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private encounterService:EncounterService,
     private gameService: GameService
   ) { }
 
   ngOnInit() {
   }
 
-  startGameWithName(): void {
+  public startGameWithName(): void {
     this.gameService.startNewEncounterWithName(this.encounterNaam, this.playerNaam);
   }
 
-  startGameWithId(): void {
+  public startGameWithId(): void {
     this.gameService.startNewEncounterWithId(this.encounterId, this.playerNaam);
   }
 
-  showTextField(): void {
+  public showTextField(): void {
     this.showNumber = false;
     this.showText = !this.showText;
   }
 
-  showNumberField(): void {
+  public showNumberField(): void {
     this.showText = false;
     this.showNumber = !this.showNumber;
   }

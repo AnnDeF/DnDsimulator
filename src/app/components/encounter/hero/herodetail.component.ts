@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
     <div class="row">
         <div class="col-4"></div>
         <div class="col-6">
-            <h3>{{hero.naam}}</h3>
+            <h3 class="heroNaam mt-3">{{hero.naam}}</h3>
         </div>
     </div>
 
@@ -25,7 +25,8 @@ import { Observable } from 'rxjs';
             <btn-save *ngIf="!isNew" (onClick)="updateHero()"></btn-save>
         </div>
     </div>
-</div>` 
+</div>` ,
+  styles:['.heroNaam{ color: rgb(33, 37, 41); font-family: serif; text-shadow: 0 0 3px red, 0 0 5px #d91f26, 0 0 2px #FF0000, 0 0 5px #d91f26; text-decoration: underline; text-decoration-line: underline overline; }']
 })
 export class HeroDetailComponent implements OnInit {
     private hero: any;

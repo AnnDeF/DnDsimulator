@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs/operators';
   <div class="row">
       <div class="col-4"></div>
       <div class="col-6">
-          <h3>{{monster.naam}}</h3>
+          <h3 class="monsterNaam mt-3">{{monster.naam}}</h3>
       </div>
   </div>
 
@@ -24,7 +24,8 @@ import { switchMap } from 'rxjs/operators';
       <btn-save *ngIf="!isNew" (onClick)="updateMonster()"></btn-save>
     </div>
   </div>
-</div>`
+</div>`,
+styles:['.monsterNaam{ color: rgb(33, 37, 41); font-family: serif; text-shadow: 0 0 3px red, 0 0 5px #d91f26, 0 0 2px #FF0000, 0 0 5px #d91f26; text-decoration: underline; text-decoration-line: underline overline; }']
 })
 export class MonsterDetailComponent implements OnInit {
   private monster: any;

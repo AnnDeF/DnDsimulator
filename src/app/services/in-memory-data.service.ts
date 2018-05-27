@@ -246,7 +246,7 @@ export class CreaturesData implements InMemoryDbService {
     const encounters = [
       {
         'id': 1,
-        'playerName': '',
+        'playerName': 'Jake',
         'encounterNaam': 'Adventure Time',
         'selectedHeroes': [{
             'id': 9,
@@ -306,7 +306,7 @@ export class CreaturesData implements InMemoryDbService {
       },
       {
       'id': 2,
-      'playerName': '',
+      'playerName': 'Trump',
       'encounterNaam': 'Hero Academia',
       'selectedHeroes': [{
         'id': 1,

@@ -24,12 +24,10 @@ export class FightComponent implements OnInit {
   private heroesAlive: Creature[];
   private monstersAliveAndInVisible: Creature[];
   private monstersAliveAndVisible: Creature[];
+  private usefullCreatures:Creature[];
   private idx: number = 0;
   private sub: any;
 
-  private showStart: boolean = true;
-  private showPlayButtons: boolean = false;
-  private isDying: boolean = false;
   private _encounter: Encounter = null;
 
   @Input()
@@ -50,6 +48,7 @@ export class FightComponent implements OnInit {
 
   ngOnInit() {
     this.decideInitiative();
+    console.log(this._encounter);
   }
 
   // bepalen initiatief en sorteren
@@ -150,7 +149,7 @@ export class FightComponent implements OnInit {
   }
 
   private getUseFullCreatures(): Creature[] {
-    let usefullCreatures = this.sortedCreatures.filter(creature => {
+    this.usefullCreatures = this.sortedCreatures.filter(creature => {
       if (creature.isMonster && creature['isVisible'] == false)
         return false;
       if (creature.battleHP == 0)
@@ -159,7 +158,7 @@ export class FightComponent implements OnInit {
       return true;
     });
 
-    this.heroesAlive = usefullCreatures.filter(creature => !creature.isMonster);
+    this.heroesAlive = this.usefullCreatures.filter(creature => !creature.isMonster);
     this.monstersAliveAndVisible = this.creatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == true);
     this.monstersAliveAndInVisible = this.creatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == false);
 
@@ -183,7 +182,7 @@ export class FightComponent implements OnInit {
       }
     }
 
-    return usefullCreatures;
+    return this.usefullCreatures;
   }
 
   public onHealthPositiveChanged(healthPower: number, creatureId: number): void {
@@ -211,6 +210,7 @@ export class FightComponent implements OnInit {
     }
     if (foe.battleHP <= 0) {
       foe.battleHP = 0;
+      foe['isDead']=true;
     };
 
     if (foe.isMonster) { this.monsterService.updateCreature(foe).subscribe(); }
@@ -220,11 +220,9 @@ export class FightComponent implements OnInit {
   public getCurrentHealthPercentage(creature: Creature): string {
     const percentage = this.percentage(creature);
     if (percentage > 50) {
-      //creature['isDying'] = false;
       return percentage + "%";
     }
     else {
-      //this.isDying = true;
       return percentage + "%";
     }
   }
@@ -236,15 +234,11 @@ export class FightComponent implements OnInit {
     if (percentage > 50) return 'bg-info';
     if (percentage > 20) return 'bg-warning';
 
-    return 'bg-danger';
+   return 'bg-danger';
   }
 
   private percentage(creature: Creature): number {
     return (creature.battleHP / creature.maxHP) * 100;
   }
-
-  //foutmelding geven als alle monsters op onzichtbaar staan - verder spelen?
-  // alert als alle helden dood zijn => nieuw spel beginnen?
-  // alle values teru gnaar originele waarden als spel herstart
 }
 
