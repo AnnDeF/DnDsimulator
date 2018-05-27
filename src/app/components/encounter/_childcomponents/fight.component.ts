@@ -48,7 +48,6 @@ export class FightComponent implements OnInit {
 
   ngOnInit() {
     this.decideInitiative();
-    console.log(this._encounter);
   }
 
   // bepalen initiatief en sorteren
@@ -161,8 +160,6 @@ export class FightComponent implements OnInit {
     this.heroesAlive = this.usefullCreatures.filter(creature => !creature.isMonster);
     this.monstersAliveAndVisible = this.creatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == true);
     this.monstersAliveAndInVisible = this.creatures.filter(creature => creature.isMonster && creature.battleHP > 0 && creature['isVisible'] == false);
-
-    console.log('get usefull creatures...', this.heroesAlive.length, this.monstersAliveAndInVisible.length, this.monstersAliveAndVisible.length);
 
     if (this.heroesAlive.length == 0) {
       if (confirm("Game over! Alle helden zijn verslagen. Wil je een nieuw spel beginnen?")) {

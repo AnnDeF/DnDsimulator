@@ -36,7 +36,6 @@ export class EncounterDetailComponent implements OnInit {
   ngOnInit() {
     this.gameService.initiativeNumbers.subscribe(newNumbers => {
       this.initiativeNumbers = newNumbers;
-      console.log(this.initiativeNumbers);
     })
   }
 
